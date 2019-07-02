@@ -51,8 +51,7 @@ class LoginContainer extends Component {
 
     render() {
         const { isLoading } = this.state
-        // if (this.state.isLoggedIn) {
-        //     return <Redirect to='/' />
+        
         if (this.props.loggedIn) {
             this.props.history.push('/')
             return null
