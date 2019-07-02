@@ -3,7 +3,7 @@ import NavbarContainer from './containers/NavbarContainer'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
 // urls
-import { nearEventsURL } from './urls'
+
 
 import CardDeck from 'react-bootstrap/CardDeck'
 import Card from 'react-bootstrap/Card'
@@ -17,16 +17,11 @@ import { setLocation } from './actions/users'
 const SeeAll = (props) => <Link to={props.url} className='see-all'>See all</Link>
 class Home extends Component {
 
-  state = {
-    groups: [],
-    events: [],
-    tournaments: []
-  }
   askLocation = () => {
     // debugger
     if (window.navigator.geolocation) {
-      debugger
       window.navigator.geolocation.getCurrentPosition(position => {
+        console.log(position)
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
@@ -36,7 +31,7 @@ class Home extends Component {
       }, err => {
         // handleLocationError(true, infoWindow, map.getCenter());
         console.log("error: ", err)
-      }, {timeout: 5000});
+      }, {maximumAge:60000, timeout: 5000, enableHighAccuracy: true});
     } else {
       console.log("Browser doesn't support Geolocation")
       // this.handleLocationError(false, infoWindow, map.getCenter());
@@ -44,30 +39,15 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // fetch groups, events, tournaments to get nearest three
-    // google.maps.geometry.spherical.computeDistanceBetween()
-    if (true) {
-      this.askLocation()
-    } else {
-      fetch(nearEventsURL, {
-        method: 'POST',
-        body: JSON.stringify({
-          lat: 30,
-          lng: -95
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-          console.log('Data: ', data)
-      })
-    }
+    this.askLocation()
   }
 
   render() {
+      if (!!this.props.nearByLocations) {
+        console.log(this.props.nearByLocations.groups)
+        console.log(this.props.nearByLocations.tournaments)
+        console.log(this.props.nearByLocations.games)
+      }
       return (
         <React.Fragment>
         <div className="App">
@@ -232,4 +212,4 @@ class Home extends Component {
   }
 }
 
-export default connect(state => ({latLng: state.latLng}), { setLocation })(Home);
+export default connect(state => ({latLng: state.latLng, nearByLocations: state.nearByLocations}), { setLocation })(Home);

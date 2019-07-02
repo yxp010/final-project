@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
         @groups = Group.all.select {|group| (group.lat - params[:lat]).abs < 0.5 && (group.lng - params[:lng]).abs < 0.5 }
 
-        render json: {groups: @groups, tournament: @tournament, games: @games}, status: :ok
+        render json: {groups: @groups, tournaments: @tournament, games: @games}, status: :ok
     end
 
     

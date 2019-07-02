@@ -1,6 +1,7 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
 
-const initialState = { loggedIn: false, latLng: null}
+const initialState = { loggedIn: false, latLng: null, nearByLocations: null}
 
 const store = createStore((state = initialState, action) => {
     switch (action.type) {
@@ -10,8 +11,10 @@ const store = createStore((state = initialState, action) => {
             return {...state, currentUser: null}
         case 'SET_LOCATION':
             return {...state, latLng: action.latLng}
+        case 'SET_NEARBY_LOCATIONS':
+            return {...state, nearByLocations: action.nearByLocations}
         default: return state
     }
-}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+}, applyMiddleware(thunk))
 
 export default store
