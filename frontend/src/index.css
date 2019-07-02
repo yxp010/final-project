@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    font-family: "montserrat", sans-serif;
+}
+
+.login-container {
+    max-width: 600px;
+}
+
+.card-deck-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+h3 {
+    display: inline;
+}
+
+
+.card-deck-info-container .see-all {
+    padding: 8px;
+    float: right;
+}
+
+.map {
+    height: 100%;
+    
+}
