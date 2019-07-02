@@ -4,7 +4,9 @@ class CreateGroups < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :founder_id
       t.integer :type_id
-      
+      t.string :location
+      t.float :lat
+      t.float :lng
       t.timestamps
     end
   end

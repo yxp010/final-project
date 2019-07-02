@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 2019_06_25_195435) do
     t.string "name"
     t.integer "founder_id"
     t.integer "type_id"
+    t.string "location"
+    t.float "lat"
+    t.float "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
