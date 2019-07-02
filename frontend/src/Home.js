@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavbarContainer from './containers/NavbarContainer'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import ShowCard from './components/ShowCard'
 
 // urls
 
@@ -14,21 +15,24 @@ import { setLocation } from './actions/users'
 
 class Home extends Component {
 
+  success = position => {
+    console.log('success')
+    var pos = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+    this.props.setLocation(pos)
+  }
+
+  fail = err => {
+    // handleLocationError(true, infoWindow, map.getCenter());
+    console.log("error: ", err)
+  }
+
   askLocation = () => {
     // debugger
     if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(position => {
-        console.log(position)
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        debugger
-        this.props.setLocation(pos)
-      }, err => {
-        // handleLocationError(true, infoWindow, map.getCenter());
-        console.log("error: ", err)
-      }, {maximumAge:60000, timeout: 5000, enableHighAccuracy: true});
+      window.navigator.geolocation.getCurrentPosition(this.success, this.fail, {maximumAge:60000, enableHighAccuracy: true});
     } else {
       console.log("Browser doesn't support Geolocation")
       // this.handleLocationError(false, infoWindow, map.getCenter());
@@ -46,22 +50,22 @@ class Home extends Component {
         console.log(this.props.nearByLocations.games)
       }
       return (
-        <React.Fragment>
         <div className="App">
-          <NavbarContainer />
-          <ButtonToolbar>
-          <Link to='/games' className='btn btn-primary btn-lg'>
-            Games
-          </Link>
-          <Link to='/tournaments' className='btn btn-primary btn-lg'>
-          Tournaments
-          </Link>
-        </ButtonToolbar>
+            <NavbarContainer />
+            <div className='landing-page'>
+            <div className='page-content'>
+              <Link to='/games' >
+                Games
+              </Link>
+              <Link to='/tournaments' >
+              Tournaments
+              </Link>
+            </div>
+            </div>
+            <NearbyCardDeck type='Pickup games'/>
+            <NearbyCardDeck type='Tournaments'/>
+            <NearbyCardDeck type='Groups'/>
         </div>
-        <NearbyCardDeck type='Pickup games'/>
-        <NearbyCardDeck type='Tournaments'/>
-        <NearbyCardDeck type='Groups'/>
-        </React.Fragment>
       );
   }
 }

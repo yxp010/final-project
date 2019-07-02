@@ -8,6 +8,62 @@ body {
     font-family: "montserrat", sans-serif;
 }
 
+.landing-page {
+    width: 100%;
+    height: 100vh;
+    background: #000;
+}
+
+.landing-page::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://chainimage.com/images/extreme-rock-climbing-sport-hd-desktop-mobile-wallpaper-background.jpg') no-repeat;
+    background-size: cover;
+    opacity: .5;
+}
+
+.page-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.page-content a{
+    display: inline-block;
+    text-decoration: none;
+    color: #438ae7;
+    border: 3px solid #438ae7;
+    text-transform: uppercase;
+    padding: 30px 20px;
+    width: 300px;
+    margin-right: 50px;
+    transition: 0.4s linear;
+}
+
+.page-content a:last-child{
+    margin-right: 0px;
+}
+
+.page-content a:hover {
+    display: block;
+    color: #fff;
+    background: #438ae7;
+}
+
 .login-container {
     max-width: 600px;
 }
@@ -15,20 +71,36 @@ body {
 .card-deck-container {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 40px;
 }
 
 h3 {
     display: inline;
 }
-
+.card-deck-info-container {
+    width: 100%;
+    margin-bottom: 10px;
+}
 
 .card-deck-info-container .see-all {
     padding: 8px;
     float: right;
+    margin-right: 10px
 }
 
 .map {
     height: 100%;
     
 }
+
+/* .showCard {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+    min-width: 600px;
+} */
