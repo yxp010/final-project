@@ -1,5 +1,4 @@
 import CardDeck from 'react-bootstrap/CardDeck'
-import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
 import React from 'react'
 
@@ -15,7 +14,7 @@ const NearbyCardDeck = props => {
             <h3 style={{marginLeft: '15px'}}>{props.type} near you</h3>
             <SeeAll url='/games'/>
           </div>
-          <CardDeck style={{width: '100%'}}>
+          <CardDeck >
               <ShowCard/>
               <ShowCard/>
               <ShowCard/>

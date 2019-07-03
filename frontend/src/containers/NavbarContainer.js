@@ -42,14 +42,13 @@ class NavbarContainer extends Component {
         })
         .then(() => {
             this.props.logout()
-            window.location.assign('/')
         })
     }
 
     render() {
         return <div className='nav-bar'>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Link to='/' className='navbar-brand'>Home</Link>
+        <Navbar collapseOnSelect expand="lg" style={{backgroundColor: '#101D2E'}} variant="dark">
+            <Link to='/' className='navbar-brand'>Website Name</Link>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">

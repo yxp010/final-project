@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import NavbarContainer from './containers/NavbarContainer'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import ShowCard from './components/ShowCard'
+import LandingPage from './components/LandingPage'
 
 // urls
 
 import NearbyCardDeck from './containers/NearbyCardDeck'
 
-import { Link } from 'react-router-dom'
+
 
 // redux
 import { connect } from 'react-redux'
-import { setLocation } from './actions/users'
+import { setLocation } from './actions/locations'
 
 class Home extends Component {
 
@@ -52,16 +51,7 @@ class Home extends Component {
       return (
         <div className="App">
             <NavbarContainer />
-            <div className='landing-page'>
-            <div className='page-content'>
-              <Link to='/games' >
-                Games
-              </Link>
-              <Link to='/tournaments' >
-              Tournaments
-              </Link>
-            </div>
-            </div>
+            <LandingPage />
             <NearbyCardDeck type='Pickup games'/>
             <NearbyCardDeck type='Tournaments'/>
             <NearbyCardDeck type='Groups'/>

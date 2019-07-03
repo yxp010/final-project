@@ -7,8 +7,9 @@ const store = createStore((state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN': 
             return {...state, loggedIn: action.loggedIn}
-        case 'REMOVE_CURRENT_USER':
-            return {...state, currentUser: null}
+        case 'LOGOUT':
+            window.location.assign('/')
+            return {...state, loggedIn: action.loggedIn}
         case 'SET_LOCATION':
             return {...state, latLng: action.latLng}
         case 'SET_NEARBY_LOCATIONS':

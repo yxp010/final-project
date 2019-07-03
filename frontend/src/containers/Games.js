@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import NavbarContainer from './NavbarContainer'
-import { Link } from 'react-router-dom'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
 class Games extends Component {
 
