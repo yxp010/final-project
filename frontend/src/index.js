@@ -19,6 +19,7 @@ import SignupContainer from './containers/SignupContainer'
 import Games from './containers/Games'
 import Tournaments from './containers/Tournaments'
 import Groups from './containers/Groups'
+import GroupShowPage from './containers/GroupShowPage'
 // Create New Component Containers
 import NewGroup from './containers/NewGroup'
 import NewTournament from './containers/NewTournament'
@@ -29,13 +30,14 @@ const routing = (
         <Router>
             <Switch>
                 <Route exact path='/' component={ Home } />
-                <Route path='/explore' component={ Explore }/>
-                <Route path='/new_group' component={ NewGroup }/>
-                <Route path='/new_game' component={ NewGame }/>
-                <Route path='/new_tournament' component={ NewTournament }/>
-                <Route path='/games' component={ Games }/>
-                <Route path='/groups' component={ Groups }/>
-                <Route path='/tournaments' component={ Tournaments }/>
+                <Route path='/explore' component={ Explore } />
+                <Route path='/new_group' component={ NewGroup } />
+                <Route path='/new_game' component={ NewGame } />
+                <Route path='/new_tournament' component={ NewTournament } />
+                <Route exact path='/games' component={ Games } />
+                <Route exact path='/groups' component={ Groups } />
+                <Route path='/groups/:id' component={ GroupShowPage } />
+                <Route path='/tournaments' component={ Tournaments } />
                 <Route path='/login' component={ LoginContainer } />
                 <Route path='/signup' component={ SignupContainer } />
             </Switch>

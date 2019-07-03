@@ -52,9 +52,9 @@ class Home extends Component {
         <div className="App">
             <NavbarContainer />
             <LandingPage />
-            <NearbyCardDeck type='Pickup games'/>
-            <NearbyCardDeck type='Tournaments'/>
-            <NearbyCardDeck type='Groups'/>
+            <NearbyCardDeck type='games' title='Pickup games'/>
+            <NearbyCardDeck type='tournaments' title='Tournaments'/>
+            <NearbyCardDeck type='groups' title='Groups'/>
         </div>
       );
   }

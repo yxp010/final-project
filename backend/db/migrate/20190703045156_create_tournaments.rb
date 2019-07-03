@@ -1,13 +1,14 @@
-class CreateGroups < ActiveRecord::Migration[5.2]
+class CreateTournaments < ActiveRecord::Migration[5.2]
   def change
-    create_table :groups do |t|
-      t.string :name
-      t.text :description
+    create_table :tournaments do |t|
       t.integer :founder_id
+      t.text :description
+      t.string :name
       t.integer :type_id
       t.string :location
       t.float :lat
       t.float :lng
+
       t.timestamps
     end
   end

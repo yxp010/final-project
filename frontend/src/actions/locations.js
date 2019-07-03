@@ -5,10 +5,7 @@ export function setLocation(latLng) {
         dispatch({type: 'SET_LOCATION', latLng});
         return fetch(nearEventsURL, {
             method: 'POST',
-            body: JSON.stringify({
-              lat: 30,
-              lng: -95
-            }),
+            body: JSON.stringify(latLng),
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'

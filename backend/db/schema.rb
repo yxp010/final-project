@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_195435) do
+ActiveRecord::Schema.define(version: 2019_07_03_050147) do
 
   create_table "events", force: :cascade do |t|
+    t.string "name"
     t.text "description"
     t.integer "founder_id"
     t.string "location"
+    t.float "lat"
+    t.float "lng"
     t.integer "type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_195435) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
+    t.text "description"
     t.integer "founder_id"
     t.integer "type_id"
     t.string "location"
@@ -42,6 +46,25 @@ ActiveRecord::Schema.define(version: 2019_06_25_195435) do
   create_table "groups_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.integer "founder_id"
+    t.text "description"
+    t.string "name"
+    t.integer "type_id"
+    t.string "location"
+    t.float "lat"
+    t.float "lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tournaments_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tournament_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

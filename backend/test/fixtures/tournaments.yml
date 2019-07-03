@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  founder_id: 1
+  name: MyString
+  type_id: 1
+  location: MyString
+  lat: 1
+  lng: 1
+
+two:
+  founder_id: 1
+  name: MyString
+  type_id: 1
+  location: MyString
+  lat: 1
+  lng: 1

@@ -53,10 +53,22 @@ class ApplicationController < ActionController::Base
 
     def near_events
 
-        @groups = Group.all.select {|group| (group.lat - params[:lat]).abs < 0.5 && (group.lng - params[:lng]).abs < 0.5 }
-
-        render json: {groups: @groups, tournaments: @tournament, games: @games}, status: :ok
+        @groups = self.find_near_three('Group')
+        @games = self.find_near_three('Event')
+        @tournaments = self.find_near_three('Tournament')
+        # byebug
+        render json: {groups: @groups, tournaments: @tournaments, games: @games}, status: :ok
     end
 
+    def find_near_three(classname) 
+        arr = []
+        classname.constantize.all.each do |row|
+            if (row.lat - params[:lat]).abs < 0.5 && (row.lng - params[:lng]).abs < 0.5
+                arr << row
+                break if arr.count == 3
+            end
+        end
+        arr
+    end
     
 end
