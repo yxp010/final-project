@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import NavBarContainer from './NavbarContainer'
+import LoadingAnimation from '../components/LoadingAnimation'
 import { baseURL } from '../urls'
 
 export default class GroupShowPage extends PureComponent {
@@ -24,7 +25,6 @@ export default class GroupShowPage extends PureComponent {
             <React.Fragment>
                 <NavBarContainer />
                 <div>
-                    <h1>show page</h1>
                     {!!this.state.data ?
                     <div>
                     <h2>{this.state.data.name}</h2>
@@ -34,7 +34,7 @@ export default class GroupShowPage extends PureComponent {
                     <h2>{this.state.data.lng}</h2>
                     <h2>{this.state.data.location}</h2>
                     </div>
-                    : null
+                    : <LoadingAnimation />
                     }
                     
                 </div>

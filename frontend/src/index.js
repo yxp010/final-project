@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 // css
 import './index.css';
-
+import './loading.css'
 // Redux
 import { Provider } from 'react-redux'
 
