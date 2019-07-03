@@ -8,10 +8,10 @@ const LandingPage = props => {
                   <h1>MyWebsite</h1>
                   <p>Some info of the website blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
                   <div className='page-buttons'>
-                    <Link to='/games' >
+                    <Link to='/games' className='landingBtn btnMtoS'>
                       Games
                     </Link>
-                    <Link to='/tournaments' >
+                    <Link to='/tournaments' className='landingBtn btnMtoS'>
                     Tournaments
                     </Link>
                   </div>

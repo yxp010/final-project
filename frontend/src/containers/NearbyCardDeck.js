@@ -23,7 +23,6 @@ const NearbyCardDeck = props => {
               :
               [1,2,3].map(n => <ShowCard key={n}/>)
               }
-              
           </CardDeck>
             </div>
     )
