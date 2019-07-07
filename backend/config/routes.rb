@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   # USER EVENTS
   get '/users/:id/events', to: 'users#show_events'
+  post '/games/join', to: 'events#join'
+  delete '/games/cancel', to: 'events#cancel_join'
 
   # Event Users
   get '/events/:id/users', to: 'events#users'

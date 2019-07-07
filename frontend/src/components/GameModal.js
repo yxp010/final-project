@@ -2,8 +2,41 @@ import React, { PureComponent } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Map from '../components/Map'
+import { baseURL } from '../urls'
 
 class GameModal extends PureComponent {
+
+    handleJoin = () => {
+      fetch(baseURL + `/${this.props.info.eventtype}/join`, {
+        method: 'POST',
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }, 
+        body: JSON.stringify({id: this.props.info.id})
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          switch (data.error) {
+            case 'You have joined this event':
+              console.log("joined before: ", data)
+              break
+            case 'not loggin':
+              console.log('not loggin: ', data)
+              break
+            default:
+              return
+          }
+        } else {
+          console.log('OK 200: ', data)
+        }
+      })
+      .catch(err => {
+        console.log('Error: ', err)
+      })
+    }
 
     showDirection = () => {
         window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURI(this.props.info.location)}`)
@@ -39,7 +72,9 @@ class GameModal extends PureComponent {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <h1>Join?</h1>
+          <Button onClick={this.handleJoin}>YES</Button>
+          <Button onClick={() => {}}>NO</Button>
         </Modal.Footer>
       </Modal>
       );

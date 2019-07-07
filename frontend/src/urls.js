@@ -5,8 +5,9 @@ export const checkLogin = 'http://localhost:3001/login_check'
 // Near events
 export const nearEventsURL = 'http://localhost:3001/near_events'
 
-// Join group
+// Join group / games / tournaments
 export const joinGroup = 'http://localhost:3001/applies'
+export const joinGame = 'http://localhost:3001/events/join'
 
 // Games
 export const gamesURL = 'http://localhost:3001/games'
