@@ -13,7 +13,14 @@ class GroupsController < ApplicationController
 
     def show
         @group = Group.find(params[:id])
-        render json: @group
+        @founder = User.find(@group.founder_id)
+        if !!@group.users 
+            @members = @group.users
+        else
+            @members = []
+        end
+        !!@group.upcoming_events ? @upcoming_events = @group.upcoming_events : @upcoming_events = []
+        render json: {upcoming_events: @upcoming_events, group: @group, members: @members, founder: @founder}
     end
 
     def create
@@ -51,6 +58,6 @@ class GroupsController < ApplicationController
     private 
 
     def group_params 
-        params.require(:group).permit(:name, :type_id, :location, :lat, :lng)
+        params.require(:group).permit(:name, :type_id, :location, :lat, :lng, :city, :state, :description)
     end
 end

@@ -78,6 +78,10 @@ body {
     text-decoration: none;
 }
 
+.map {
+    height: 100%;
+  }
+
 .landingBtn {
     display: inline-block;
     position: relative;

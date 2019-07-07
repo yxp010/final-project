@@ -51,9 +51,12 @@ class LoginContainer extends Component {
 
     render() {
         const { isLoading } = this.state
-        
         if (this.props.loggedIn) {
-            this.props.history.push('/')
+            if (!!this.props.viewedPageBeforeLogin) {
+                this.props.history.push(this.props.viewedPageBeforeLogin)
+            } else {
+                this.props.history.push('/')
+            }
             return null
         } else {
             return <React.Fragment>
@@ -87,4 +90,4 @@ class LoginContainer extends Component {
 }
 
 
-export default connect(state => ({loggedIn: state.loggedIn}), { login })(LoginContainer); 
+export default connect(state => ({loggedIn: state.loggedIn, viewedPageBeforeLogin: state.viewedPageBeforeLogin}), { login })(LoginContainer); 

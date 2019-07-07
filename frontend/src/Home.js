@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import NavbarContainer from './containers/NavbarContainer'
 import LandingPage from './components/LandingPage'
 
@@ -12,7 +12,7 @@ import NearbyCardDeck from './containers/NearbyCardDeck'
 import { connect } from 'react-redux'
 import { setLocation } from './actions/locations'
 
-class Home extends Component {
+class Home extends PureComponent {
 
   success = position => {
     console.log('success')
@@ -39,7 +39,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.askLocation()
+    if (!this.props.latLng) this.askLocation()
   }
 
   render() {

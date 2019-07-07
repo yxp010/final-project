@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_03_182738) do
+ActiveRecord::Schema.define(version: 2019_07_05_144320) do
+
+  create_table "applies", force: :cascade do |t|
+    t.integer "applicant_id"
+    t.integer "group_id"
+    t.integer "times", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -20,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_07_03_182738) do
     t.float "lat"
     t.float "lng"
     t.integer "type_id"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,11 +40,33 @@ ActiveRecord::Schema.define(version: 2019_07_03_182738) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "group_events", force: :cascade do |t|
+    t.string "name"
+    t.datetime "date"
+    t.text "description"
+    t.integer "group_id"
+    t.string "location"
+    t.float "lat"
+    t.float "lng"
+    t.integer "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "group_events_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "founder_id"
     t.integer "type_id"
+    t.string "city"
+    t.string "state"
     t.string "location"
     t.float "lat"
     t.float "lng"
@@ -51,8 +82,7 @@ ActiveRecord::Schema.define(version: 2019_07_03_182738) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "receiver_id"
+    t.integer "user_id"
     t.boolean "has_read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,6 +96,7 @@ ActiveRecord::Schema.define(version: 2019_07_03_182738) do
     t.string "location"
     t.float "lat"
     t.float "lng"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,14 +1,14 @@
-class CreateEvents < ActiveRecord::Migration[5.2]
+class CreateGroupEvents < ActiveRecord::Migration[5.2]
   def change
-    create_table :events do |t|
+    create_table :group_events do |t|
       t.string :name
+      t.datetime :date
       t.text :description
-      t.integer :founder_id
+      t.integer :group_id
       t.string :location
       t.float :lat
       t.float :lng
       t.integer :type_id
-      t.datetime :date
 
       t.timestamps
     end

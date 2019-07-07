@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :events
   resources :groups
+  resources :applies, only: [:create]
 
   # NEAR EVENTS (GROUPS, TOURNAMENTS, GAMES)
   post '/near_events', to: 'application#near_events'

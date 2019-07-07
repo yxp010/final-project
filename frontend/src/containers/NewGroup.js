@@ -28,8 +28,6 @@ class NewGroup extends Component {
 
     handleCreate = e => {
         e.preventDefault()
-        
-
         // fetch google api to get getmetry location (lat & lng)
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.group.location}&key=AIzaSyAi5sbutxQNY6KM3W7mez3opdp8VfeneMY`)
         .then(res => res.json())
@@ -50,6 +48,8 @@ class NewGroup extends Component {
                             name: this.state.group.name,
                             type_id: this.state.group.type_id,
                             location: data.results[0].formatted_address,
+                            city: data.results[0].address_components.find(c => c.types.find(t => t === "locality")).long_name,
+                            state: data.results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name,
                             lat: data.results[0].geometry.location.lat,
                             lng: data.results[0].geometry.location.lng
                         },
@@ -58,7 +58,6 @@ class NewGroup extends Component {
                 })
                 .then(res => res.json()) 
                 .then(data => {
-                    // debugger
                     if (!this.props.loggedIn) {
                         this.props.history.push('/login')
                     } else if (!!data.error) {

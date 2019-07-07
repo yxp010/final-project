@@ -21,7 +21,8 @@ const NearbyCardDeck = props => {
               ? 
               props.nearByLocations[props.type].map(card => <ShowCard key={card.id} {...card} type={props.type} />)
               :
-              [1,2,3].map(n => <ShowCard key={n}/>)
+              // [1,2,3].map(n => <ShowCard key={n}/>)
+              null
               }
           </CardDeck>
             </div>

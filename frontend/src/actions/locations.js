@@ -16,6 +16,12 @@ export function setLocation(latLng) {
             type: 'SET_NEARBY_LOCATIONS',
             nearByLocations
         }))
-    }
-    
+    }   
+}
+
+export function storeViewingPage(url) {
+  return {
+    type: 'STORE_VIEWING_PAGE',
+    url
+  }
 }

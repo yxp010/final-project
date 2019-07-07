@@ -8,7 +8,8 @@ class CreateTournaments < ActiveRecord::Migration[5.2]
       t.string :location
       t.float :lat
       t.float :lng
-
+      t.datetime :date
+      
       t.timestamps
     end
   end
