@@ -31,7 +31,7 @@ class Home extends PureComponent {
   askLocation = () => {
     // debugger
     if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(this.success, this.fail, {maximumAge:60000, enableHighAccuracy: true});
+      window.navigator.geolocation.getCurrentPosition(this.success, this.fail, {maximumAge:60000, enableHighAccuracy: false});
     } else {
       console.log("Browser doesn't support Geolocation")
       // this.handleLocationError(false, infoWindow, map.getCenter());
@@ -43,6 +43,7 @@ class Home extends PureComponent {
   }
 
   render() {
+      // console.log(this.props.latLng)
       if (!!this.props.nearByLocations) {
         console.log(this.props.nearByLocations.groups)
         console.log(this.props.nearByLocations.tournaments)

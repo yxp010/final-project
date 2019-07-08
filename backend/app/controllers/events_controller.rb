@@ -19,13 +19,20 @@ class EventsController < ApplicationController
 
     def join
         if login?
-            @join = EventsUser.find_by(user_id: @current_user.id, event_id: params[:id])
-            if @join 
-                render json: {error: 'You have joined this event', data: @join}
+            @event = Event.find(params[:id])
+
+            if @event.founder_id == @current_user.id
+                render json: {error: 'You are the founder of this event'}, status: 400
             else
-                @join = EventsUser.create(user_id: @current_user.id, event_id: params[:id])
-                render json: {status: 'successful', data: @join}
+                @join = EventsUser.find_by(user_id: @current_user.id, event_id: @event.id)
+                if @join 
+                    render json: {error: 'You have joined this event', data: @join}, status: 400
+                else
+                    @join = EventsUser.create(user_id: @current_user.id, event_id: @event.id)
+                    render json: {status: 'successful', data: @join}, status: 200
+                end
             end
+            
         else
             render json: {error: 'not loggin'}, status: :unauthorized
         end
@@ -33,13 +40,20 @@ class EventsController < ApplicationController
 
     def cancel_join
         if login?
-            @join = EventsUser.find_by(user_id: @current_user.id, event_id: params[:id])
-            if @join
-                @join.destroy
-                render json: {status: 'Successfully destroyed'}, status: 200
+            @event = Event.find(params[:id])
+
+            if @event.founder_id == @current_user.id
+                render json: {error: 'You are the founder of this event'}, status: 400
             else
-                render json: {error: 'You have not joined this event yet'}, status, 400
+                @join = EventsUser.find_by(user_id: @current_user.id, event_id: @event.id)
+                if @join
+                    @join.destroy
+                    render json: {status: 'Successfully destroyed'}, status: 200
+                else
+                    render json: {error: 'You have not joined this event yet'}, status: 400
+                end
             end
+            
         else 
             render json: {error: 'not loggin'}, status: :unauthorized
         end

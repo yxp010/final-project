@@ -9,7 +9,7 @@ class GroupEventsUser < ApplicationRecord
     after_update :send_notification
 
     def send_notification
-        Notification.create(user_id: self.group_event.group.founder_id)
+        Notification.create(user_id: self.group_event.group.founder_id, message: "User '#{self.user.username} asks to join the group.' ")
         # byebug
     end
 

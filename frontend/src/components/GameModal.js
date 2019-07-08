@@ -6,6 +6,41 @@ import { baseURL } from '../urls'
 
 class GameModal extends PureComponent {
 
+    handleCancelJoin = () => {
+      fetch(baseURL + `/${this.props.info.eventtype}/cancel`, {
+        method: 'DELETE',
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }, 
+        body: JSON.stringify({id: this.props.info.id})
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          switch (data.error) {
+            case 'You have not joined this event yet':
+              console.log("You have not joined: ", data)
+              break
+            case 'not loggin':
+              window.location.assign('/login')
+              break
+            case 'You are the founder of this event':
+                console.log('You are the founder of this event')
+                break
+            default:
+              return
+          }
+        } else {
+          console.log('OK 200: ', data)
+        }
+      })
+      .catch(err => {
+        console.log('Error: ', err)
+      })
+    }
+
     handleJoin = () => {
       fetch(baseURL + `/${this.props.info.eventtype}/join`, {
         method: 'POST',
@@ -24,7 +59,10 @@ class GameModal extends PureComponent {
               console.log("joined before: ", data)
               break
             case 'not loggin':
-              console.log('not loggin: ', data)
+              window.location.assign('/login')
+              break
+            case 'You are the founder of this event':
+              console.log('You are the founder of this event')
               break
             default:
               return
@@ -74,7 +112,7 @@ class GameModal extends PureComponent {
         <Modal.Footer>
           <h1>Join?</h1>
           <Button onClick={this.handleJoin}>YES</Button>
-          <Button onClick={() => {}}>NO</Button>
+          <Button onClick={this.handleCancelJoin}>NO</Button>
         </Modal.Footer>
       </Modal>
       );
