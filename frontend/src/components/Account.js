@@ -13,6 +13,7 @@ import ProfileInfo from './Profile/ProfileInfo'
 import LoadingAnimation from './LoadingAnimation'
 import EventList from './event-list/EventList'
 import Group from './Profile/Group'
+import Notifications from './Profile/Notifications'
 
 
 class ProfilePage extends React.Component {
@@ -50,6 +51,8 @@ class ProfilePage extends React.Component {
                 return <EventList time='upcoming' eventtype='games'/>
             case 'groups':
                 return <Group />
+            case 'notifications':
+                return <Notifications />
             default: 
                 return <h1>info</h1>
         }
@@ -83,7 +86,7 @@ class ProfilePage extends React.Component {
                                 </div>
                             </li>
                             <li className='menu-item'>
-                                <a href='#' className='menu-btn'><i className="fas fa-bell"></i>Notifications</a>
+                                <a name='notifications' href='#' className='menu-btn' onClick={this.switchContent}><i className="fas fa-bell"></i>Notifications</a>
                             </li>
                             <li className='menu-item' id='settings'>
                                 <a href='#settings' className='menu-btn'><i className="fas fa-cogs"></i>Settings</a>

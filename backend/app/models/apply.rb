@@ -8,7 +8,8 @@ class Apply < ApplicationRecord
     after_update :send_notification
 
     def send_notification
-        Notification.create(user_id: self.applied_group.founder_id)
-        # byebug
+        @applicant = self.applicant
+        @group = self.applied_group
+        Notification.create(applicant_id: @applicant.id, apply_group_id: @group.id, user_id: self.applied_group.founder_id, notification_type: 'check', message: "User '#{@applicant.username}' asks to join group '#{@group.name}'.")
     end
 end

@@ -85,6 +85,10 @@ ActiveRecord::Schema.define(version: 2019_07_05_144320) do
     t.integer "user_id"
     t.text "message"
     t.boolean "has_read", default: false
+    t.string "notification_type"
+    t.boolean "has_check", default: false
+    t.integer "apply_group_id"
+    t.integer "applicant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -12,13 +12,17 @@ Rails.application.routes.draw do
   # USER GROUPS
   get '/users/:id/groups', to: 'users#show_groups'
   get '/user/groups', to: 'groups#user_groups'
+  post '/notifications/:id/accept_user', to: 'groups#accept_user'
+
   # leave group
   delete '/user/groups/:id/leave', to: 'users#leave_group'
 
   #user notifications
-  get '/users/:id/notifications', to: 'users#user_notifications'
-  get '/users/:id/notifications_read', to: 'users#user_notifications_read'
-  get '/users/:id/notifications_unread', to: 'users#user_notifications_unread'
+  get '/user/notifications', to: 'users#user_notifications'
+  get '/user/notifications_read', to: 'users#user_notifications_read'
+  get '/user/notifications_unread', to: 'users#user_notifications_unread'
+  patch '/user/notifications/:id/read', to: 'users#read_notification'
+  patch '/user/notifications/:id/unread', to: 'users#unread_notification'
 
   # USER EVENTS
   get '/user/past_events', to: 'users#past_events'

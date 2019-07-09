@@ -13,8 +13,12 @@ export const joinGame = 'http://localhost:3001/events/join'
 export const profile = 'http://localhost:3001/user/profile'
 // User past||upcomming events
 export const userTimeEvents = time => `http://localhost:3001/user/${time}_events`
-// User upcomming events
-// export const upcommingEvents = 'http://localhost:3001/user/upcomming_events'
+
+// User notification
+export const userNotification = 'http://localhost:3001/user/notifications'
+export const acceptToGroup = (id) => `http://localhost:3001/notifications/${id}/accept_user`
+export const readNotification = id => `http://localhost:3001/user/notifications/${id}/read`
+export const unreadNotification = id => `http://localhost:3001/user/notifications/${id}/unread`
 
 // Games
 export const gamesURL = 'http://localhost:3001/games'

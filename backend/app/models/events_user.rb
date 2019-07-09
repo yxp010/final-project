@@ -7,10 +7,10 @@ class EventsUser < ApplicationRecord
     after_destroy_commit :send_delete_notification
 
     def send_create_notification
-        Notification.create(user_id: self.event.founder_id, message: "User '#{self.user.username}' has joined the game (#{self.event.name}).")
+        Notification.create(notification_type: 'message', user_id: self.event.founder_id, message: "User '#{self.user.username}' has joined the game (#{self.event.name}).")
     end
 
     def send_delete_notification
-        Notification.create(user_id: self.event.founder_id, message: "User '#{self.user.username}' has left the game (#{self.event.name}).")
+        Notification.create(notification_type: 'message', user_id: self.event.founder_id, message: "User '#{self.user.username}' has left the game (#{self.event.name}).")
     end
 end

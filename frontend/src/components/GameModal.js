@@ -125,6 +125,7 @@ class GameModal extends PureComponent {
         {
           !!this.props.handleLeaveGroup ?
           <Modal.Footer>
+            <Button variant="primary" onClick={() => window.location.assign(`/groups/${this.props.info.id}`)}>Detail</Button>
           <Button variant="danger" onClick={() => this.props.handleLeaveGroup(this.props.info.id)}>Leave Group</Button>
       </Modal.Footer>
           : null

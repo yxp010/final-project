@@ -53,6 +53,36 @@ class GroupsController < ApplicationController
         
     end
 
+    def accept_user 
+        if login?
+            @notification = Notification.find(params[:id])
+            @group = Group.find(@notification.apply_group_id)
+            @applicant = User.find(@notification.applicant_id)
+            if !!@group
+                if !!@applicant 
+                    in_group = GroupsUser.find_by(user_id: @applicant.id, group_id: @group.id)
+                    if in_group
+                        Notification.where(user_id: @current_user.id, applicant_id: @applicant.id, apply_group_id: @group.id).update_all(has_read: true, has_check: true)
+                        @notifications = @current_user.notifications.reverse
+                        render json: {staus: 'This user is already in group', notifications: @notifications}, status: 400
+                    else
+                        Notification.where(user_id: @current_user.id, applicant_id: @applicant.id, apply_group_id: @group.id).update_all(has_read: true, has_check: true)
+                        GroupsUser.create(user_id: @applicant.id, group_id: @group.id)
+                        @notifications = @current_user.notifications.reverse
+                        render json: {status: 'successful', notifications: @notifications}, status: 200
+                    end
+                else
+                    render json: {no_user_error: 'This user cannot be found (account could have been deleted).'}, status: 400
+                end
+                
+            else
+                render json: {group_error: 'No groups found, might be deleted by founder'}, status: 404
+            end
+        else
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+    end
+
     def users
         @group = Group.find(params[:id])
         @users = @group.users
