@@ -22,7 +22,7 @@ Group.create(city: 'Houston', state: 'TX', description: 'group4 description',nam
 Group.create(city: 'Houston', state: 'TX', description: 'group5 description',name: 'btball', founder_id: 3, type_id: 2, location: 'google', lat: 29.6, lng: -95)
 Group.create(city: 'Houston', state: 'TX', description: 'group6 description',name: '8th floor pingpong', founder_id: 2, type_id: 3, location: 'what', lat: 19.5, lng: -95)
 
-GroupsUser.create(group_id: 1, user_id: 1)
+# GroupsUser.create(group_id: 1, user_id: 1)
 GroupsUser.create(group_id: 1, user_id: 2)
 GroupsUser.create(group_id: 1, user_id: 3)
 

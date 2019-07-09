@@ -41,6 +41,10 @@ class GameModal extends PureComponent {
       })
     }
 
+    checkShowFooter = () => {
+      return this.props.showfooter === 'true' ? true : false
+    }
+
     handleJoin = () => {
       fetch(baseURL + `/${this.props.info.eventtype}/join`, {
         method: 'POST',
@@ -81,6 +85,7 @@ class GameModal extends PureComponent {
     }
 
     render() {
+      console.log(this.props)
       return (
         <Modal
             {...this.props}
@@ -109,11 +114,21 @@ class GameModal extends PureComponent {
             ac consectetur ac, vestibulum at eros.
           </p>
         </Modal.Body>
+        {this.checkShowFooter() ?
         <Modal.Footer>
-          <h1>Join?</h1>
-          <Button onClick={this.handleJoin}>YES</Button>
-          <Button onClick={this.handleCancelJoin}>NO</Button>
-        </Modal.Footer>
+        <h1>Join?</h1>
+        <Button onClick={this.handleJoin}>YES</Button>
+        <Button onClick={this.handleCancelJoin}>NO</Button>
+      </Modal.Footer>
+      : null
+        }
+        {
+          !!this.props.handleLeaveGroup ?
+          <Modal.Footer>
+          <Button variant="danger" onClick={() => this.props.handleLeaveGroup(this.props.info.id)}>Leave Group</Button>
+      </Modal.Footer>
+          : null
+        }
       </Modal>
       );
     }

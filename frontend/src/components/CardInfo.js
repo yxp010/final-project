@@ -1,7 +1,13 @@
 import React, { PureComponent } from 'react'
 import Card from 'react-bootstrap/Card'
 
+
 export default class CardInfo extends PureComponent {
+
+    isGroupCard = () => {
+      return this.props.isGroupCard === 'true' ? true : false
+    }
+
     render() {
         return( 
         <div onClick={this.props.showModal} className='card' style={{marginLeft: '27px', marginRight: '27px', cursor: 'pointer'}}>
@@ -13,9 +19,14 @@ export default class CardInfo extends PureComponent {
              1000 people comming
           </Card.Text>
         </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Date</small>
-        </Card.Footer>
+        {this.isGroupCard() ?
+            null
+        :
+            <Card.Footer>
+            <small className="text-muted">Date</small>
+          </Card.Footer>
+        }
+        
       </div>
         )
     }

@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 
-const initialState = { loggedIn: false, latLng: null, nearByLocations: null, viewedPageBeforeLogin: null}
+const initialState = { username: null, loggedIn: false, latLng: null, nearByLocations: null, viewedPageBeforeLogin: null}
 
 const store = createStore((state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN': 
-            return {...state, loggedIn: action.loggedIn}
+            return {...state, loggedIn: action.loggedIn, username: action.username}
         case 'LOGOUT':
             window.location.assign('/')
             return {...state, loggedIn: action.loggedIn}

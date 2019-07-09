@@ -26,8 +26,12 @@ class NavbarContainer extends Component {
         })
         .then(res => res.json())
         .then(data => {
+            // debugger
             if (!data.error) {
-                this.props.login()
+                this.props.login(data.username)
+                // if (this.props.setUser) this.props.setUser(data.id)
+            } else {
+                if (this.props.changePage) this.props.changePage()
             }
         })
     }
@@ -49,6 +53,7 @@ class NavbarContainer extends Component {
         return <div className='nav-bar'>
         <Navbar collapseOnSelect expand="lg" style={{backgroundColor: '#101D2E'}} variant="dark">
             <Link to='/' className='navbar-brand'>Website Name</Link>
+
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
@@ -69,9 +74,16 @@ class NavbarContainer extends Component {
                             Log in
                         </Link>
                            }
+                        {this.props.loggedIn
+                        ?
+                        <NavDropdown title="Account" id="collasible-nav-dropdown">
+                            <Link to={`/users/${this.props.username}`} className='dropdown-item'>Profile</Link>
+                            <Link to='/setting' className='dropdown-item'>Setting</Link>
+                        </NavDropdown>
+                        :
                         <Link to='/signup' className='nav-link'>
                              Sign up
-                        </Link>
+                        </Link>}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -80,4 +92,4 @@ class NavbarContainer extends Component {
     
 }
 
-export default connect(state => ({loggedIn: state.loggedIn}), { login, logout } )(NavbarContainer)
+export default connect(state => ({loggedIn: state.loggedIn, username: state.username}), { login, logout } )(NavbarContainer)

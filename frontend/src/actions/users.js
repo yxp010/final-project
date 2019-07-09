@@ -1,9 +1,10 @@
 
 
-export function login() {
+export function login(username) {
     return {
         type: 'LOGIN',
-        loggedIn: true
+        loggedIn: true,
+        username
     }
 }
 

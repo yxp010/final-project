@@ -61,6 +61,9 @@ class GroupShowPage extends PureComponent {
             } else if (!!data.apply_error) {
                 console.log('apply error: ', data)
                 this.setState({disableJoin: true})
+            } else if (!!data.founder_error) {
+                console.log('founder err: ', data.founder_error)
+                this.setState({disableJoin: true})
             } else {
                 console.log('success', data)
             }

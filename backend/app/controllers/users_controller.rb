@@ -29,11 +29,84 @@ class UsersController < ApplicationController
         render json: @groups
     end
 
+    def leave_group
+        if login?
+            @joined = GroupsUser.find_by(user_id: @current_user.id, group_id: params[:id])
+
+            if @joined 
+                if @joined.group.founder_id == @current_user.id 
+                    render json: {error: "Cannot leave group that you created, you can delete the group in 'groups created by you' in menu on the left."}, status: 400
+                else
+                    @joined.destroy
+                    render json: {status: 'successfully left'}, status: 200
+                end
+            else 
+                render json: {no_group_error: 'No group found, this group might be deleted by the creater.'}, status: 400
+            end
+        else
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+    end
+
     def show_events
         @user = User.find(params[:id])
         @events = @user.events
-
         render json: @events
+    end
+
+    def profile 
+        if login?
+            @groups_amount = @current_user.groups.count
+            @past_events = @current_user.past_events.count
+            render json: {username: @current_user.username, groups_amount: @groups_amount, past_events: @past_events}, status: 200
+        else
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+    end
+
+    def past_events
+        if login?
+            @past_events = @current_user.past_events
+            render json: {events: @past_events}
+        else 
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+    end
+
+    def upcoming_events
+        if login?
+            @upcoming_events = @current_user.upcoming_events
+            render json: {events: @upcoming_events}
+        else 
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+    end
+
+    def user_notifications
+        if login?
+            @notifications = @current_user.notifications
+            render json: {notifications: @notifications}
+        else 
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+    end
+
+    def user_notifications_read
+        if login?
+            @notifications = @current_user.notifications.where(has_read: true)
+            render json: {notifications: @notifications}
+        else 
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+    end
+
+    def user_notifications_unread
+        if login?
+            @notifications = @current_user.notifications.where(has_read: false)
+            render json: {notifications: @notifications}
+        else 
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
     end
 
     private 

@@ -9,6 +9,12 @@ class Group < ApplicationRecord
 
     validates :name, presence: true
 
+    after_create_commit :add_founder
+
+    def add_founder
+        GroupsUser.create(user_id: self.founder_id, group_id: self.id)
+    end
+
     def upcoming_events
         events = self.group_events.select do |e|
             e.date > Time.zone.now.to_datetime

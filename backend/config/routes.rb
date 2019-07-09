@@ -12,9 +12,17 @@ Rails.application.routes.draw do
   # USER GROUPS
   get '/users/:id/groups', to: 'users#show_groups'
   get '/user/groups', to: 'groups#user_groups'
+  # leave group
+  delete '/user/groups/:id/leave', to: 'users#leave_group'
+
+  #user notifications
+  get '/users/:id/notifications', to: 'users#user_notifications'
+  get '/users/:id/notifications_read', to: 'users#user_notifications_read'
+  get '/users/:id/notifications_unread', to: 'users#user_notifications_unread'
 
   # USER EVENTS
-  get '/users/:id/events', to: 'users#show_events'
+  get '/user/past_events', to: 'users#past_events'
+  get '/user/upcoming_events', to: 'users#upcoming_events'
   post '/games/join', to: 'events#join'
   delete '/games/cancel', to: 'events#cancel_join'
 
@@ -32,6 +40,11 @@ Rails.application.routes.draw do
   # auth login
   post '/auth/login', to: 'authentication#login'
 
+  #user profile
+  get '/user/profile', to: 'users#profile'
   # Not Found Erro
   get '/*a', to: 'application#not_found'
+
+  
+  
 end

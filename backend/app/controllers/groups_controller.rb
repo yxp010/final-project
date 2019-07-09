@@ -7,8 +7,13 @@ class GroupsController < ApplicationController
     end
 
     def user_groups
-        @groups = @current_user.groups
-        render json: @groups
+        if login?
+            @groups = @current_user.groups
+            render json: {groups: @groups}
+        else
+            render json: {error: 'not logged in'}, status: :unauthorized
+        end
+        
     end
 
     def show

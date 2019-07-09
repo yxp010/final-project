@@ -14,5 +14,21 @@ class User < ApplicationRecord
     has_many :applies
     has_many :applied_groups, through: :applies
 
+    validates :username, uniqueness: true
+
     has_secure_password
+
+    def past_events
+        events = self.events.select do |e|
+            e.date < Time.zone.now.to_datetime
+        end
+        events
+    end
+
+    def upcoming_events
+        events = self.events.select do |e|
+            e.date > Time.zone.now.to_datetime
+        end
+        events
+    end
 end

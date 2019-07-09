@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // key: 'AIzaSyAi5sbutxQNY6KM3W7mez3opdp8VfeneMY'
-
+// import 'semantic-ui-css/semantic.min.css'
 // css
 import './index.css';
 import './loading.css'
@@ -20,6 +20,8 @@ import Games from './containers/Games'
 import Tournaments from './containers/Tournaments'
 import Groups from './containers/Groups'
 import GroupShowPage from './containers/GroupShowPage'
+import Account from './components/Account'
+import Profile from './components/Profile'
 // Create New Component Containers
 import NewGroup from './containers/NewGroup'
 import NewTournament from './containers/NewTournament'
@@ -40,6 +42,8 @@ const routing = (
                 <Route path='/tournaments' component={ Tournaments } />
                 <Route path='/login' component={ LoginContainer } />
                 <Route path='/signup' component={ SignupContainer } />
+                <Route path='/setting' component={ Account }/>
+                <Route path='/users/:username' component={ Profile } />
             </Switch>
         </Router>
     </Provider>

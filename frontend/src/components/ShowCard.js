@@ -22,7 +22,7 @@ class ShowCard extends React.Component {
     return (
       <React.Fragment>
       <CardInfo showModal={this.showModal}/>
-      {this.state.modalContainerShow ? <GameModal show={this.state.modalShow} onHide={this.modalClose} info={this.props}/> : null}
+      {this.state.modalContainerShow ? <GameModal show={this.state.modalShow} showfooter={this.props.showfooter} onHide={this.modalClose} info={this.props}/> : null}
       </React.Fragment>
   )
   }
