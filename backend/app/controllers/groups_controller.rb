@@ -69,7 +69,8 @@ class GroupsController < ApplicationController
                         Notification.where(user_id: @current_user.id, applicant_id: @applicant.id, apply_group_id: @group.id).update_all(has_read: true, has_check: true)
                         GroupsUser.create(user_id: @applicant.id, group_id: @group.id)
                         @notifications = @current_user.notifications.reverse
-                        render json: {status: 'successful', notifications: @notifications}, status: 200
+                        @unread_notifications_count = @current_user.notifications.where(has_read: false).count
+                        render json: {status: 'successful', notifications: @notifications, unread_notifications_count: @unread_notifications_count}, status: 200
                     end
                 else
                     render json: {no_user_error: 'This user cannot be found (account could have been deleted).'}, status: 400

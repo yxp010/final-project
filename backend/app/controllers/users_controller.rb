@@ -103,7 +103,7 @@ class UsersController < ApplicationController
     def user_notifications_unread
         if login?
             @notifications = @current_user.notifications.where(has_read: false)
-            render json: {notifications: @notifications}
+            render json: {notifications: @notifications, count: @notifications.count}
         else 
             render json: {error: 'not logged in'}, status: :unauthorized
         end
@@ -113,7 +113,8 @@ class UsersController < ApplicationController
         if login?
             @notification = Notification.find(params[:id])
             @notification.update(has_read: true)
-            render json: {notification: @notification, status: 'successful'}, status: 200
+            @notifications = @current_user.notifications.reverse
+            render json: {notification: @notification, notifications: @notifications, status: 'successful'}, status: 200
         else 
             render json: {error: 'not logged in'}, status: :unauthorized
         end
@@ -123,7 +124,8 @@ class UsersController < ApplicationController
         if login?
             @notification = Notification.find(params[:id])
             @notification.update(has_read: false)
-            render json: {notification: @notification, status: 'successful'}, status: 200
+            @notifications = @current_user.notifications.reverse
+            render json: {notification: @notification, notifications: @notifications, status: 'successful'}, status: 200
         else 
             render json: {error: 'not logged in'}, status: :unauthorized
         end

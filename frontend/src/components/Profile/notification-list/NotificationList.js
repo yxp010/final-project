@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import NotificationListItem from './NotificationListItem'
 
-class NotificationList extends Component {
+import { connect } from 'react-redux'
+
+class NotificationList extends PureComponent {
     
     renderList = () => {
         // debugger
-        return this.props.notifications.map(notification => <NotificationListItem handleAccept={this.props.handleAccept} {...notification} key={notification.id} />)
+        return this.props.notifications.map(notification => <NotificationListItem {...notification} key={notification.id} />)
     }
+
+    
     
     render() {
         // debugger
@@ -22,4 +26,4 @@ class NotificationList extends Component {
     }
 }
 
-export default NotificationList
+export default connect(state => ({notifications: state.notifications}))(NotificationList)

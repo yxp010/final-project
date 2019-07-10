@@ -22,8 +22,13 @@
     /* border-radius: 8px; */
 }
 
+/* .middle:before{
+    
+} */
+
 .middle {
     position: relative;
+    z-index: 999;
     /* top: 30%;
     left: 15%; */
     /* transform: translate(-50%, -50%); */

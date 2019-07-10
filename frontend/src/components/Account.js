@@ -3,10 +3,10 @@ import NavbarContainer from '../containers/NavbarContainer'
 import './profile.css'
 //action
 import { logout } from '../actions/users'
+import { setNotificationNumber } from '../actions/notification'
+import { connect } from 'react-redux'
 // urls
-import { logoutURL } from '../urls'
-
-import { connect } from 'react-redux';
+import { logoutURL, unreadNotifications } from '../urls'
 
 // components 
 import ProfileInfo from './Profile/ProfileInfo'
@@ -66,6 +66,15 @@ class ProfilePage extends React.Component {
         this.props.history.push('/login')
     }
 
+    componentDidMount() {
+        fetch(unreadNotifications)
+        .then(res => res.json())
+        .then(data => {
+            // debugger
+            this.props.setNotificationNumber(data.count)
+        })
+    }
+
   render() {
 
     return (
@@ -85,8 +94,12 @@ class ProfilePage extends React.Component {
                                     <a name='groups' onClick={this.switchContent} href='javascript:void(0);'>Groups</a>
                                 </div>
                             </li>
-                            <li className='menu-item'>
+                            <li className='menu-item' style={{display: 'flex'}}>
                                 <a name='notifications' href='#' className='menu-btn' onClick={this.switchContent}><i className="fas fa-bell"></i>Notifications</a>
+                                {/* <i style={{color: 'red', marginRight: '10px', padding: '26px'}} className="fas fa-circle"></i> */}
+                                {
+                                    this.props.numberOfUnreadNotifications === 0 ? null : <span style={{color: '#d63031', marginRight: '10px', padding: '20px', fontSize: 18, cursor: 'pointer'}}>{this.props.numberOfUnreadNotifications}</span>
+                                }
                             </li>
                             <li className='menu-item' id='settings'>
                                 <a href='#settings' className='menu-btn'><i className="fas fa-cogs"></i>Settings</a>
@@ -101,6 +114,7 @@ class ProfilePage extends React.Component {
                         </div>   
                     </div>
                     </div>
+                    {/* <div style={{width: '300px', position: 'relative', zIndex: 0, margin: '30px'}}></div> */}
                     <div className='profile-content' >
                         {this.showData()}
                     </div>
@@ -114,4 +128,4 @@ class ProfilePage extends React.Component {
 
 }
 
-export default connect(state => ({loggedIn: state.loggedIn}), { logout })(ProfilePage)
+export default connect(state => ({loggedIn: state.loggedIn, numberOfUnreadNotifications: state.numberOfUnreadNotifications}), { logout, setNotificationNumber })(ProfilePage)

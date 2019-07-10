@@ -1,37 +1,18 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 // components 
 import NotificationList from './notification-list/NotificationList'
 import LoadingAnimation from '../LoadingAnimation'
 
-import { userNotification, acceptToGroup } from '../../urls'
+// actions 
+import {setNotifications} from '../../actions/notification'
+import {connect} from 'react-redux'
 
-class Notifications extends Component {
+import { userNotification } from '../../urls'
+
+class Notifications extends PureComponent {
 
     state = {
-        notifications: [],
         loading: true
-    }
-
-    handleAccept = notification_id => {
-        fetch(acceptToGroup(notification_id), {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            // debugger
-            if (data.status) {
-                this.setState({
-                    notifications: [...data.notifications]
-                })
-            } else {
-                console.log(data)
-            }
-        })
     }
 
     componentDidMount() {
@@ -41,8 +22,9 @@ class Notifications extends Component {
             if (!!data.error) {
                 window.location.assign('/login')
             } else {
+                // debugger
+                this.props.setNotifications(data.notifications)
                 this.setState({
-                    notifications: data.notifications,
                     loading: false
                 })
             }
@@ -62,9 +44,9 @@ class Notifications extends Component {
             <div>
                 Checkboxes
             </div>
-            <NotificationList handleAccept={this.handleAccept} notifications={this.state.notifications}/>
+            <NotificationList />
             </React.Fragment>
     }
 }
 
-export default Notifications
+export default connect(state => ({notifications: state.notifications}), { setNotifications })(Notifications)

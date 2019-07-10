@@ -2,20 +2,39 @@ import React, { Component } from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 
+// actions
+import { connect } from 'react-redux'
+import { setNotifications, acceptNotification, unreadNotification, readNotification } from '../../../actions/notification'
+
+
+import { acceptToGroup } from '../../../urls'
 //urls
-import { readNotification, unreadNotification } from '../../../urls' 
+import { readNotificationURL, unreadNotificationURL } from '../../../urls' 
 
 class NotificationListItem extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            notification: props
-        }
+    handleAccept = notification_id => {
+        fetch(acceptToGroup(notification_id), {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            // debugger
+            if (data.status) {
+                this.props.acceptNotification(data.notifications, data.unread_notifications_count)
+            } else {
+                console.log(data)
+            }
+        })
     }
 
     handleRead = () => {
-        fetch(readNotification(this.state.notification.id), {
+        fetch(readNotificationURL(this.props.id), {
             method: 'PATCH',
             credentials: 'include',
             headers: {
@@ -25,12 +44,12 @@ class NotificationListItem extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({notification: data.notification})
+            this.props.readNotification(data.notifications)
         })
     }
 
     handleUnread = () => {
-        fetch(unreadNotification(this.state.notification.id), {
+        fetch(unreadNotificationURL(this.props.id), {
             method: 'PATCH',
             credentials: 'include',
             headers: {
@@ -40,12 +59,12 @@ class NotificationListItem extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({notification: data.notification})
+            this.props.unreadNotification(data.notifications)
         })
     }
 
     render() {
-        const { notification_type, has_read, message, created_at, has_check, id } = this.state.notification
+        const { notification_type, has_read, message, created_at, has_check, id } = this.props
         return(
             <React.Fragment>
                 <div style={{marginBottom: '10px'}}>
@@ -61,10 +80,10 @@ class NotificationListItem extends Component {
                         <div style={{marginTop: '10px', display: 'flex'}}>
                             <Button style={{marginRight: '10px'}} onClick={this.handleRead} variant="primary">Read</Button>
                             {
-                                notification_type === 'check' && !this.props.has_check
+                                notification_type === 'check' && !has_check
                                 ?
                                 <React.Fragment>
-                                <Button onClick={() => this.props.handleAccept(id)} style={{marginRight: '10px'}} variant="success"><i className="fas fa-user-check"></i></Button>
+                                <Button onClick={() => this.handleAccept(id)} style={{marginRight: '10px'}} variant="success"><i className="fas fa-user-check"></i></Button>
                                 <Button style={{marginRight: '10px'}} variant="danger"><i className="fas fa-user-times"></i></Button>
                                 </React.Fragment>
                                 :
@@ -80,4 +99,4 @@ class NotificationListItem extends Component {
     }
 }
 
-export default NotificationListItem
+export default connect(null, { readNotification, unreadNotification, setNotifications, acceptNotification })(NotificationListItem)
