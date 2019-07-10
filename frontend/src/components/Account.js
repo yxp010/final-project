@@ -96,7 +96,6 @@ class ProfilePage extends React.Component {
                             </li>
                             <li className='menu-item' style={{display: 'flex'}}>
                                 <a name='notifications' href='#' className='menu-btn' onClick={this.switchContent}><i className="fas fa-bell"></i>Notifications</a>
-                                {/* <i style={{color: 'red', marginRight: '10px', padding: '26px'}} className="fas fa-circle"></i> */}
                                 {
                                     this.props.numberOfUnreadNotifications === 0 ? null : <span style={{color: '#d63031', marginRight: '10px', padding: '20px', fontSize: 18, cursor: 'pointer'}}>{this.props.numberOfUnreadNotifications}</span>
                                 }

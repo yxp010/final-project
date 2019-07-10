@@ -21,6 +21,7 @@ export const hasReadNotifications = 'http://localhost:3001/user/notifications_re
 export const unreadNotifications = 'http://localhost:3001/user/notifications_unread'
 export const readNotificationURL = id => `http://localhost:3001/user/notifications/${id}/read`
 export const unreadNotificationURL = id => `http://localhost:3001/user/notifications/${id}/unread`
+export const deleteNotificationURL = id => `http://localhost:3001/notifications/${id}`
 
 // Games
 export const gamesURL = 'http://localhost:3001/games'

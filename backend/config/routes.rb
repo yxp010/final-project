@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/user/notifications_unread', to: 'users#user_notifications_unread'
   patch '/user/notifications/:id/read', to: 'users#read_notification'
   patch '/user/notifications/:id/unread', to: 'users#unread_notification'
+  delete '/notifications/:id', to: 'users#delete_notification'
 
   # USER EVENTS
   get '/user/past_events', to: 'users#past_events'

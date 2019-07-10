@@ -6,12 +6,29 @@ import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import { setNotifications, acceptNotification, unreadNotification, readNotification } from '../../../actions/notification'
 
-
-import { acceptToGroup } from '../../../urls'
 //urls
-import { readNotificationURL, unreadNotificationURL } from '../../../urls' 
+import { readNotificationURL, unreadNotificationURL, acceptToGroup, deleteNotificationURL } from '../../../urls' 
 
 class NotificationListItem extends Component {
+
+    handleDelete = notification_id => {
+        fetch(deleteNotificationURL(notification_id), {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status) {
+                this.props.acceptNotification(data.notifications, data.unread_notifications_count)
+            } else {
+                console.log(data)
+            }
+        })
+    }
 
     handleAccept = notification_id => {
         fetch(acceptToGroup(notification_id), {
@@ -74,7 +91,8 @@ class NotificationListItem extends Component {
                         {
                         has_read ?
                             <div style={{marginTop: '10px', display: 'flex'}}>
-                                <Button style={{marginRight: '10px'}} onClick={this.handleUnread} variant="primary">Unread</Button>                   
+                                <Button style={{marginRight: '10px'}} onClick={this.handleUnread} variant="primary">Unread</Button>  
+                                <i style={{cursor: 'pointer', paddingTop: '5px'}} onClick={() => this.handleDelete(id)} className="fas fa-trash-alt"></i>                 
                             </div>
                         :
                         <div style={{marginTop: '10px', display: 'flex'}}>
@@ -89,9 +107,10 @@ class NotificationListItem extends Component {
                                 :
                                 null
                             }                        
-                            
+                            <i style={{cursor: 'pointer', paddingTop: '5px'}} onClick={() => this.handleDelete(id)} className="fas fa-trash-alt"></i>
                         </div>
                     }
+                    
                     </ListGroup.Item>
                 </div>
             </React.Fragment>
