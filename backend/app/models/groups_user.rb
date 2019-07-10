@@ -14,7 +14,7 @@ class GroupsUser < ApplicationRecord
         Notification.create(notification_type: 'message', user_id: self.group.founder_id, message: "User '#{self.user.username}' has left the group (#{self.group.name}).")
         @apply = Apply.find_by(applicant_id: self.user.id, group_id: self.group.id)
         if @apply
-            @apply.update(times: 0)
+            @apply.destroy
         end
         # Reset apply time
     end

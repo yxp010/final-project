@@ -61,7 +61,6 @@ class NavbarContainer extends Component {
                     <NavDropdown title="Create" id="collasible-nav-dropdown">
                         <Link to='/new_group' className='dropdown-item'>New Group</Link>
                         <Link to='/new_game' className='dropdown-item'>New Game</Link>
-                        <Link to='/new_tournament' className='dropdown-item'>New Tournament</Link>
                     </NavDropdown>
                         {this.props.loggedIn 
                         ?

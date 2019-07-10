@@ -95,6 +95,7 @@ body {
     margin-right: 50px;
     overflow: hidden;
     transition: 1s all ease;
+    border-radius: 6px;
 }
 
 .landingBtn:hover {

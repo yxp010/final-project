@@ -46,7 +46,7 @@ class Home extends PureComponent {
       // console.log(this.props.latLng)
       if (!!this.props.nearByLocations) {
         console.log(this.props.nearByLocations.groups)
-        console.log(this.props.nearByLocations.tournaments)
+        // console.log(this.props.nearByLocations.tournaments)
         console.log(this.props.nearByLocations.games)
       }
       return (
@@ -54,7 +54,7 @@ class Home extends PureComponent {
             <NavbarContainer />
             <LandingPage />
             <NearbyCardDeck type='games' title='Pickup games'/>
-            <NearbyCardDeck type='tournaments' title='Tournaments'/>
+            {/* <NearbyCardDeck type='tournaments' title='Tournaments'/> */}
             <NearbyCardDeck type='groups' title='Groups'/>
         </div>
       );

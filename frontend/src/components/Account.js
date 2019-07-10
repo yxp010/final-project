@@ -66,14 +66,14 @@ class ProfilePage extends React.Component {
         this.props.history.push('/login')
     }
 
-    componentDidMount() {
-        fetch(unreadNotifications)
-        .then(res => res.json())
-        .then(data => {
-            // debugger
-            this.props.setNotificationNumber(data.count)
-        })
-    }
+    // componentDidMount() {
+    //     fetch(unreadNotifications)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         // debugger
+    //         this.props.setNotificationNumber(data.count)
+    //     })
+    // }
 
   render() {
 

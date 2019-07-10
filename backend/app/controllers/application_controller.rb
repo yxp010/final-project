@@ -55,9 +55,8 @@ class ApplicationController < ActionController::Base
 
         @groups = self.find_near_three('Group')
         @games = self.find_near_three('Event')
-        @tournaments = self.find_near_three('Tournament')
-        # byebug
-        render json: {groups: @groups, tournaments: @tournaments, games: @games}, status: :ok
+        # @tournaments = self.find_near_three('Tournament')
+        render json: {groups: @groups, games: @games}, status: :ok
     end
 
     def find_near_three(classname) 
