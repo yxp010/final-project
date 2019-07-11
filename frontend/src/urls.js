@@ -4,6 +4,8 @@ export const loginURL = 'http://localhost:3001/auth/login'
 export const checkLogin = 'http://localhost:3001/login_check'
 // Near events
 export const nearEventsURL = 'http://localhost:3001/near_events'
+export const initialDiscoverURL = 'http://localhost:3001/discover_games_or_groups'
+export const fetchEventsURL = 'http://localhost:3001/fetch_events_on_discover'
 
 // Join group / games / tournaments
 export const joinGroup = 'http://localhost:3001/applies'
@@ -25,12 +27,14 @@ export const deleteNotificationURL = id => `http://localhost:3001/notifications/
 
 // Games
 export const gamesURL = 'http://localhost:3001/games'
+export const fetchGameUsers = id => `http://localhost:3001/events/${id}/users`
 
 // Tournaments
 export const tournamentsURL = 'http://localhost:3001/tournaments'
 
 // Groups
 export const groupsURL = 'http://localhost:3001/groups'
+export const fetchGroupUsers = id => `http://localhost:3001/groups/${id}/users`
 export const leaveGroup = id => `http://localhost:3001/user/groups/${id}/leave`
 
 // Groups for a user

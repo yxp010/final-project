@@ -14,7 +14,7 @@ const NearbyCardDeck = props => {
         <div className='card-deck-container'>
           <div className='card-deck-info-container'>
             <h3 style={{marginLeft: '15px'}}>{props.title} near you</h3>
-            <SeeAll url='/games'/>
+            <SeeAll url='/explore'/>
           </div>
           <CardDeck >
               {!!props.nearByLocations 

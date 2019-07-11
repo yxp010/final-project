@@ -10,6 +10,9 @@ class CreateGroups < ActiveRecord::Migration[5.2]
       t.string :location
       t.float :lat
       t.float :lng
+      t.string :zip_code
+      t.string :type_name
+
       t.timestamps
     end
   end

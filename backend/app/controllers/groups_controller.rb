@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
     def user_groups
         if login?
             @groups = @current_user.groups
+            # byebug
             render json: {groups: @groups}
         else
             render json: {error: 'not logged in'}, status: :unauthorized
@@ -42,7 +43,6 @@ class GroupsController < ApplicationController
             if @group.valid? 
                 # byebug
                 @group.save
-                GroupsUser.create(user_id: @current_user.id, group_id: @group.id)
                 render json: @group
             else
                 # byebug
@@ -88,12 +88,12 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
         @users = @group.users
 
-        render json: @users
+        render json: {users: @users}
     end
 
     private 
 
     def group_params 
-        params.require(:group).permit(:name, :type_id, :location, :lat, :lng, :city, :state, :description)
+        params.require(:group).permit(:name, :type_id, :location, :lat, :lng, :city, :state, :description, :zip_code)
     end
 end

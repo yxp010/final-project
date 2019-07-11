@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   # NEAR EVENTS (GROUPS, TOURNAMENTS, GAMES)
   post '/near_events', to: 'application#near_events'
+  post '/discover_games_or_groups', to: 'application#near_events_on_discover'
+  post '/fetch_events_on_discover', to: 'application#fetch_events_on_discover'
 
   # USER GROUPS
   get '/users/:id/groups', to: 'users#show_groups'

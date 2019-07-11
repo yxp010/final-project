@@ -95,7 +95,7 @@ class GameModal extends PureComponent {
         >
         <Modal.Header closeButton>
           <h1 id="contained-modal-title-vcenter">
-            Ping Pong
+            {this.props.info.name}
           </h1>
         </Modal.Header>
         <Modal.Body>
@@ -109,9 +109,7 @@ class GameModal extends PureComponent {
           <h4>Hosted by {}</h4>
           {/* <h4>{date}</h4> */}
           <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
+            {this.props.info.description}
           </p>
         </Modal.Body>
         {this.checkShowFooter() ?
@@ -126,8 +124,8 @@ class GameModal extends PureComponent {
           !!this.props.handleLeaveGroup ?
           <Modal.Footer>
             <Button variant="primary" onClick={() => window.location.assign(`/groups/${this.props.info.id}`)}>Detail</Button>
-          <Button variant="danger" onClick={() => this.props.handleLeaveGroup(this.props.info.id)}>Leave Group</Button>
-      </Modal.Footer>
+            <Button variant="danger" onClick={() => this.props.handleLeaveGroup(this.props.info.id)}>Leave Group</Button>
+        </Modal.Footer>
           : null
         }
       </Modal>

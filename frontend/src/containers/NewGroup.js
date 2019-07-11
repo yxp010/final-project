@@ -37,6 +37,7 @@ class NewGroup extends Component {
                 // show address is not correct error
                 console.log('error')
             } else {
+                debugger
                 fetch('http://localhost:3001/groups', {
                     method: 'POST',
                     credentials: "include",
@@ -51,7 +52,8 @@ class NewGroup extends Component {
                             city: data.results[0].address_components.find(c => c.types.find(t => t === "locality")).long_name,
                             state: data.results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name,
                             lat: data.results[0].geometry.location.lat,
-                            lng: data.results[0].geometry.location.lng
+                            lng: data.results[0].geometry.location.lng,
+                            zip_code: data.results[0].address_components.find(c => c.types.find(t => t === "postal_code")).short_name
                         },
                         imgURL: this.state.imgURL
                     })

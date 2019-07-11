@@ -62,6 +62,7 @@ class NavbarContainer extends Component {
                         <Link to='/new_group' className='dropdown-item'>New Group</Link>
                         <Link to='/new_game' className='dropdown-item'>New Game</Link>
                     </NavDropdown>
+                        <Link to='/explore' className='nav-link'>Explore</Link>
                         {this.props.loggedIn 
                         ?
                         <Link onClick={this.handleLogout} to='' className='nav-link'>
@@ -74,10 +75,10 @@ class NavbarContainer extends Component {
                            }
                         {this.props.loggedIn
                         ?
-                        <NavDropdown title="Account" id="collasible-nav-dropdown">
-                            <Link to={`/users/${this.props.username}`} className='dropdown-item'>Profile</Link>
-                            <Link to='/setting' className='dropdown-item'>Setting</Link>
-                        </NavDropdown>
+                        // <NavDropdown title="Account" id="collasible-nav-dropdown">
+                        //     <Link to={`/users/${this.props.username}`} className='dropdown-item'>Profile</Link>
+                        <Link to='/account' className='nav-link'>Account</Link>    
+                        // </NavDropdown>
                         :
                         <Link to='/signup' className='nav-link'>
                              Sign up

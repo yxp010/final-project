@@ -20,7 +20,12 @@ class Home extends PureComponent {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     };
-    this.props.setLocation(pos)
+    this.props.setLocation(pos, {
+      groups_count: 3,
+      events_count: 3,
+      group: true,
+      event: true,
+    })
   }
 
   fail = err => {
@@ -28,19 +33,26 @@ class Home extends PureComponent {
     console.log("error: ", err)
   }
 
-  askLocation = () => {
-    // debugger
-    if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(this.success, this.fail, {maximumAge:60000, enableHighAccuracy: false});
-    } else {
-      console.log("Browser doesn't support Geolocation")
-      // this.handleLocationError(false, infoWindow, map.getCenter());
-    }
-  }
+  // askLocation = () => {
+  //   // debugger
+  //   if (window.navigator.geolocation) {
+  //     window.navigator.geolocation.getCurrentPosition(this.success, this.fail, {maximumAge:60000, enableHighAccuracy: false});
+  //   } else {
+  //     console.log("Browser doesn't support Geolocation")
+  //     // this.handleLocationError(false, infoWindow, map.getCenter());
+  //   }
+  // }
 
   componentDidMount() {
-    if (!this.props.latLng) this.askLocation()
+    // if (!this.props.latLng) this.askLocation()
+    this.props.setLocation(null, {
+      groups_count: 3,
+      events_count: 3,
+      group: true,
+      event: true,
+    })
   }
+
 
   render() {
       // console.log(this.props.latLng)

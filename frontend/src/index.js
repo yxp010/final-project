@@ -5,6 +5,10 @@ import ReactDOM from 'react-dom';
 // css
 import './index.css';
 import './loading.css'
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 // Redux
 import { Provider } from 'react-redux'
 
@@ -13,10 +17,9 @@ import store from './store'
 
 // Components
 import Home from './Home';
-import Explore from './containers/Explore'
 import LoginContainer from './containers/LoginContainer'
 import SignupContainer from './containers/SignupContainer'
-import Games from './containers/Games'
+import Explore from './containers/Explore'
 import Tournaments from './containers/Tournaments'
 import Groups from './containers/Groups'
 import GroupShowPage from './containers/GroupShowPage'
@@ -36,13 +39,13 @@ const routing = (
                 <Route path='/new_group' component={ NewGroup } />
                 <Route path='/new_game' component={ NewGame } />
                 <Route path='/new_tournament' component={ NewTournament } />
-                <Route exact path='/games' component={ Games } />
+                {/* <Route exact path='/games' component={ Games } /> */}
                 <Route exact path='/groups' component={ Groups } />
                 <Route path='/groups/:id' component={ GroupShowPage } />
                 <Route path='/tournaments' component={ Tournaments } />
                 <Route path='/login' component={ LoginContainer } />
                 <Route path='/signup' component={ SignupContainer } />
-                <Route path='/setting' component={ Account }/>
+                <Route path='/account' component={ Account }/>
                 <Route path='/users/:username' component={ Profile } />
             </Switch>
         </Router>

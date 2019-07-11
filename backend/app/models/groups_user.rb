@@ -7,7 +7,12 @@ class GroupsUser < ApplicationRecord
     after_create_commit :send_accept_notification
 
     def send_accept_notification
-        Notification.create(notification_type: 'message', user_id: self.user.id, message: "Your have been accepted by the group (#{self.group.name}).")
+        if self.user.id == self.group.founder_id 
+            Notification.create(notification_type: 'message', user_id: self.user.id, message: "Your have successfully created group (#{self.group.name}).")
+        else
+            Notification.create(notification_type: 'message', user_id: self.user.id, message: "Your have been accepted by the group (#{self.group.name}).")
+        end
+        
     end
 
     def send_delete_notification

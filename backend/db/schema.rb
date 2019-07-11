@@ -29,6 +29,10 @@ ActiveRecord::Schema.define(version: 2019_07_05_144320) do
     t.float "lng"
     t.integer "type_id"
     t.datetime "date"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
+    t.string "type_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,6 +74,8 @@ ActiveRecord::Schema.define(version: 2019_07_05_144320) do
     t.string "location"
     t.float "lat"
     t.float "lng"
+    t.string "zip_code"
+    t.string "type_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -123,6 +129,10 @@ ActiveRecord::Schema.define(version: 2019_07_05_144320) do
     t.string "username"
     t.string "password_digest"
     t.string "email"
+    t.string "city"
+    t.string "state"
+    t.float "lat"
+    t.float "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

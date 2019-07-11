@@ -56,7 +56,6 @@ class Group extends PureComponent {
     }
 
     renderGroupDeck = () => {
-        let counter = 0
         let decks = []
         let currentGroups = [] 
         this.state.groups.forEach(group => {

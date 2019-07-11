@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+    skip_before_action :authorize_request, only: [:explore_games]
+
     def index 
         @events = Group.all
         render json: @events
@@ -14,7 +16,7 @@ class EventsController < ApplicationController
         @event = Group.find(params[:id])
         @users = @event.users
 
-        render json: @users
+        render json: {users: @users}
     end
 
     def join
@@ -57,6 +59,9 @@ class EventsController < ApplicationController
         else 
             render json: {error: 'not loggin'}, status: :unauthorized
         end
+    end
 
+    def explore_games
+        
     end
 end

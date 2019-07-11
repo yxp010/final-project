@@ -5,24 +5,21 @@ import GameModal from './GameModal'
 class ShowCard extends React.Component {
 
   state = {
-    modalShow: false,
-    modalContainerShow: false
+    modalShow: false
   }
 
   modalClose = () => {
     this.setState({ 
-      modalShow: false,
-      modalContainerShow: false 
+      modalShow: false
     })
   };
   
-  showModal = () => {this.setState({modalShow: true, modalContainerShow: true})}
+  showModal = () => {this.setState({modalShow: true})}
   render() {
-    // debugger
     return (
       <React.Fragment>
-      <CardInfo showModal={this.showModal}/>
-      {this.state.modalContainerShow ? <GameModal show={this.state.modalShow} showfooter={this.props.showfooter} onHide={this.modalClose} info={this.props}/> : null}
+      <CardInfo showModal={this.showModal} {...this.props}/>
+      {this.state.modalShow ? <GameModal show={this.state.modalShow} showfooter={this.props.showfooter} onHide={this.modalClose} info={this.props}/> : null}
       </React.Fragment>
   )
   }

@@ -1,9 +1,9 @@
 
 
-User.create(username: "a", email: 'b', password: 'a')
-User.create(username: "c", email: '22', password: 'b')
-User.create(username: "d", email: 'b33', password: 'b')
-User.create(username: "b", email: 'fffef', password: 'b')
+User.create(city: 'Houston', state: 'TX', username: "a", email: 'b', password: 'a')
+User.create(city: 'Houston', state: 'TX', username: "c", email: '22', password: 'b')
+User.create(city: 'Houston', state: 'TX', username: "d", email: 'b33', password: 'b')
+User.create(city: 'Houston', state: 'TX', username: "b", email: 'fffef', password: 'b')
 
 Type.create(name: 'soccer')
 Type.create(name: 'basketball')
@@ -26,12 +26,11 @@ Group.create(city: 'Houston', state: 'TX', description: 'group6 description',nam
 GroupsUser.create(group_id: 1, user_id: 2)
 GroupsUser.create(group_id: 1, user_id: 3)
 
-Event.create(date: dateFuture, description: 'game1 description',name: 'space city', founder_id: 1, type_id: 1, location: '3223 old chapel dr', lat: 30, lng: -95)
-Event.create(date: dateFuture, description: 'game2 description',name: 'basketball', founder_id: 3, type_id: 2, location: '3223 old chapel dr', lat: 29.8, lng: -95.3)
-Event.create(date: dateFuture, description: 'game3 description',name: '10th floor pingpong', founder_id: 2, type_id: 3, location: '3223 old chapel dr', lat: 29.8, lng: -95.1)
-Event.create(date: dateBefore, description: 'game4 description',name: 'sy', founder_id: 1, type_id: 1, location: 'facebook', lat: 30.1, lng: -95.2)
-Event.create(date: dateBefore, description: 'game5 description',name: 'btball', founder_id: 3, type_id: 2, location: 'google', lat: 29.8, lng: -95.09)
-Event.create(date: dateBefore, description: 'game6 description',name: '8th floor pingpong', founder_id: 2, type_id: 3, location: 'what', lat: 19.5, lng: -95)
+Event.create(city: 'Houston', state: 'TX', date: dateFuture, description: 'game1 description',name: 'space city', founder_id: 1, type_id: 1, location: '3223 old chapel dr', lat: 30, lng: -95)
+Event.create(city: 'Houston', state: 'TX', date: dateFuture, description: 'game2 description',name: 'basketball', founder_id: 3, type_id: 2, location: '3223 old chapel dr', lat: 29.8, lng: -95.3)
+Event.create(city: 'Houston', state: 'TX', date: dateFuture, description: 'game3 description',name: '10th floor pingpong', founder_id: 2, type_id: 3, location: '3223 old chapel dr', lat: 29.8, lng: -95.1)
+Event.create(city: 'Houston', state: 'TX', date: dateBefore, description: 'game4 description',name: 'sy', founder_id: 1, type_id: 1, location: 'facebook', lat: 30.1, lng: -95.2)
+Event.create(city: 'Houston', state: 'TX', date: dateBefore, description: 'game5 description',name: 'btball', founder_id: 3, type_id: 2, location: 'google', lat: 29.8, lng: -95.09)
 
 EventsUser.create(user_id: 3, event_id: 1)
 EventsUser.create(user_id: 1, event_id: 1)

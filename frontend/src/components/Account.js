@@ -19,14 +19,8 @@ import Notifications from './Profile/Notifications'
 class ProfilePage extends React.Component {
 
     state = {
-        // user_id: null,
         selectedSmenu: 'info',
-        // change: true
     }
-
-    // setUser = user_id => {
-    //     this.setState({user_id})
-    // }
 
     handleLogout = () => {
         fetch(logoutURL, {
@@ -58,6 +52,15 @@ class ProfilePage extends React.Component {
         }
     }
 
+    componentDidMount() {
+        fetch(unreadNotifications)
+        .then(res => res.json())
+        .then(data => {
+            this.props.setNotificationNumber(data.count)
+        })
+        
+    }
+
     switchContent = e => {
         this.setState({selectedSmenu: e.target.name})
     }
@@ -65,15 +68,6 @@ class ProfilePage extends React.Component {
     changePage = () => {
         this.props.history.push('/login')
     }
-
-    // componentDidMount() {
-    //     fetch(unreadNotifications)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         // debugger
-    //         this.props.setNotificationNumber(data.count)
-    //     })
-    // }
 
   render() {
 
@@ -113,7 +107,6 @@ class ProfilePage extends React.Component {
                         </div>   
                     </div>
                     </div>
-                    {/* <div style={{width: '300px', position: 'relative', zIndex: 0, margin: '30px'}}></div> */}
                     <div className='profile-content' >
                         {this.showData()}
                     </div>

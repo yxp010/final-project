@@ -9,7 +9,11 @@ class Group < ApplicationRecord
 
     validates :name, presence: true
 
-    after_create_commit :add_founder
+    after_create_commit :add_founder, :add_type_name
+
+    def add_type_name
+        self.update(type_name: self.type.name)
+    end
 
     def add_founder
         GroupsUser.create(user_id: self.founder_id, group_id: self.id)

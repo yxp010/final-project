@@ -1,29 +1,57 @@
 import React, { PureComponent } from 'react'
 import Card from 'react-bootstrap/Card'
 
+//urls
+import { fetchGameUsers, fetchGroupUsers } from '../urls'
+
 
 export default class CardInfo extends PureComponent {
+
+    state = {
+      usersCount: 0
+    }
 
     isGroupCard = () => {
       return this.props.isGroupCard === 'true' ? true : false
     }
 
+    formatTypeName = () => {
+      this.props.type_name.split(' ').map(word => word.slice(0, 1).toUpperCase() + word.slice(1)).join(' ')
+    }
+
+    componentDidMount() {
+      fetch(this.typeURL()(this.props.id))
+      .then(res => res.json())
+      .then(data => {
+        this.setState({usersCount: data.users.length})
+      })
+
+    }
+
+    typeURL = () => {
+      return this.props.type === 'games' ? fetchGameUsers : fetchGroupUsers
+    }
+
     render() {
         return( 
         <div onClick={this.props.showModal} className='card' style={{marginLeft: '27px', marginRight: '27px', cursor: 'pointer'}}>
-        <Card.Img variant="top" src="https://s20642.pcdn.co/wp-content/uploads/2014/03/table-tennis-1039299_1280.jpg" style={{height: '305px'}} alt='Some img here'/>
+        <Card.Img variant="top" src={this.props.img} style={{height: '305px'}} alt='Some img here'/>
         <Card.Body>
-          <Card.Subtitle className="mb-2 text-muted">event type here</Card.Subtitle>
-          <h2>event name here</h2>
+          <Card.Subtitle className="mb-2 text-muted">{this.formatTypeName()}</Card.Subtitle>
+          <h2>{this.props.name}</h2>
           <Card.Text>
-             1000 people comming
+             {this.isGroupCard() ?
+                `${this.state.usersCount} people in this group.`
+              :
+                `${this.state.usersCount} people will come to this game.`
+              }
           </Card.Text>
         </Card.Body>
         {this.isGroupCard() ?
             null
         :
             <Card.Footer>
-            <small className="text-muted">Date</small>
+            <small className="text-muted">{this.props.date}</small>
           </Card.Footer>
         }
         

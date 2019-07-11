@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 
-const initialState = { username: null, loggedIn: false, latLng: null, nearByLocations: null, viewedPageBeforeLogin: null, numberOfUnreadNotifications: 0, notifications: []}
+const initialState = { types: null, username: null, loggedIn: false, latLng: null, nearByLocations: null, viewedPageBeforeLogin: null, numberOfUnreadNotifications: 0, notifications: []}
 
 const store = createStore((state = initialState, action) => {
     switch (action.type) {
@@ -13,7 +13,7 @@ const store = createStore((state = initialState, action) => {
         case 'SET_LOCATION':
             return {...state, latLng: action.latLng}
         case 'SET_NEARBY_LOCATIONS':
-            return {...state, nearByLocations: action.nearByLocations}
+            return {...state, nearByLocations: action.nearByLocations, types: action.types}
         case 'STORE_VIEWING_PAGE':
             return {...state, viewedPageBeforeLogin: action.url}
         case 'SET_UNREAD_NOTIFICATION_NUMBER':
