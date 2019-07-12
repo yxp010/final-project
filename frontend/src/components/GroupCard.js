@@ -19,7 +19,7 @@ class GroupCard extends PureComponent {
     // debugger
     return (
       <React.Fragment>
-      <CardInfo showModal={this.showModal} isGroupCard='true' id={this.props.id}/>
+      <CardInfo showModal={this.showModal} eventtype={this.props.eventtype} isGroupCard='true' {...this.props}/>
       {this.state.modalShow ? <GameModal handleLeaveGroup={this.props.handleLeaveGroup} show={this.state.modalShow} showfooter={this.props.showfooter} onHide={this.modalClose} info={this.props}/> : null}
       </React.Fragment>
   )

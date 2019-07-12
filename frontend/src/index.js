@@ -29,12 +29,14 @@ import Profile from './components/Profile'
 import NewGroup from './containers/NewGroup'
 import NewTournament from './containers/NewTournament'
 import NewGame from './containers/NewGame'
+// import CreateModal from './components/CreateModal'
 
 const routing = (
     <Provider store={store}>
         <Router>
             <Switch>
                 <Route exact path='/' component={ Home } />
+                {/* <Route path='/create/:type' component={ CreateModal } /> */}
                 <Route path='/explore' component={ Explore } />
                 <Route path='/new_group' component={ NewGroup } />
                 <Route path='/new_game' component={ NewGame } />

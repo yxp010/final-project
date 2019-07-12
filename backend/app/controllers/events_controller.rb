@@ -7,6 +7,18 @@ class EventsController < ApplicationController
         render json: @events
     end
 
+    def create
+        if login?
+            # byebug
+            @event = Event.new(event_params)
+            @event.founder_id = @current_user.id
+            @event.save
+            render json: {event: @event}
+        else
+            render json: {error: 'not logged in'}, status: 401
+        end
+    end
+
     def show
         @event = Group.find(params[:id])
         render json: @event
@@ -61,7 +73,14 @@ class EventsController < ApplicationController
         end
     end
 
-    def explore_games
-        
+    def format_time
+        minute = params[:time].split(':')[2].to_i
+        hour = params[:time].split(':')[0].to_i
+        # byebug
+        return {minute: minute, hour: hour}
+    end
+
+    def event_params
+        return {name: params[:name], location: params[:location], description: params[:description], lat: params[:lat], lng: params[:lng], type_id: params[:type], date: DateTime.new(params[:year], params[:month], params[:day], self.format_time[:hour], self.format_time[:minute]), city: params[:city], state: params[:state]}
     end
 end

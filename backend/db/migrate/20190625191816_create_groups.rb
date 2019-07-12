@@ -12,6 +12,7 @@ class CreateGroups < ActiveRecord::Migration[5.2]
       t.float :lng
       t.string :zip_code
       t.string :type_name
+      t.string :img_url
 
       t.timestamps
     end

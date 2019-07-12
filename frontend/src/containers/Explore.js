@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import NavbarContainer from './NavbarContainer'
 import LoadingAnimation from '../components/LoadingAnimation'
 import StandaloneSearchBox from "react-google-maps/lib/components/places/StandaloneSearchBox"
+import EventList from '../components/event-list/EventList'
+import GroupDeck from '../components/Profile/GroupDeck'
+// import EventListItem from '../components/Profile/notification-list/NotificationListItem'
 //bootstrap
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
@@ -30,6 +33,22 @@ class Explore extends Component {
       searchTerm: ''
     }
 
+    renderGroupDeck = () => {
+      let decks = []
+      let currentGroups = [] 
+      this.state.groups.forEach(group => {
+          currentGroups.push(group)
+          if (currentGroups.length === 3) {
+              decks.push(<GroupDeck groups={currentGroups}/>)
+              currentGroups = []
+          }
+      });
+      if (currentGroups.length > 0) {
+          decks.push(<GroupDeck groups={currentGroups}/>)
+      } 
+      return decks
+  }
+
     SearchBoxWillMount = () => {
       const refs = {}
       return {
@@ -48,6 +67,7 @@ class Explore extends Component {
               searchTerm: this.state.searchTerm,
               eventType: this.state.eventType
             })
+
           }
 
         },
@@ -66,6 +86,7 @@ class Explore extends Component {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         }
+
       })
       .then(res => res.json())
       .then(data => {
@@ -89,13 +110,13 @@ class Explore extends Component {
     }
 
     showPage = () => {
-      switch(this.state.currentPageType) {
+      switch(this.state.type) {
         case 'games':
-          return <h1>Games list (have sort, search, filter funtionality)</h1>
+          return <EventList style={{padding: '100px'}} events={this.state.games} eventtype='games'/>
         case 'groups':
-          return <h1>Groups grid</h1>
+          return this.renderGroupDeck()
         default: 
-          return <h1>Games list (have sort, search, filter funtionality)</h1>
+          return null
       }
     }
 
@@ -155,7 +176,7 @@ class Explore extends Component {
             <div id='index-header'>
                   <h1>Find your next game</h1>
             </div>
-            <div id='search-container' >
+            <div id='search-container' style={{display: 'flex'}}>
                   <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
                     <ToggleButton onChange={() => this.handleSwitchType('games')} variant="dark" value={1} style={{padding: '22px'}}>Games</ToggleButton>
                     <ToggleButton onChange={() => this.handleSwitchType('groups')} variant="dark" value={2} style={{padding: '22px'}}>Groups</ToggleButton>

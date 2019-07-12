@@ -35,19 +35,19 @@ export default class CardInfo extends PureComponent {
     render() {
         return( 
         <div onClick={this.props.showModal} className='card' style={{marginLeft: '27px', marginRight: '27px', cursor: 'pointer'}}>
-        <Card.Img variant="top" src={this.props.img} style={{height: '305px'}} alt='Some img here'/>
+        <Card.Img variant="top" src={this.props.img_url} style={{height: '305px'}} alt='Some img here'/>
         <Card.Body>
           <Card.Subtitle className="mb-2 text-muted">{this.formatTypeName()}</Card.Subtitle>
           <h2>{this.props.name}</h2>
           <Card.Text>
-             {this.isGroupCard() ?
+             {this.props.type === 'groups' ?
                 `${this.state.usersCount} people in this group.`
               :
                 `${this.state.usersCount} people will come to this game.`
               }
           </Card.Text>
         </Card.Body>
-        {this.isGroupCard() ?
+        {this.props.type === 'groups' ?
             null
         :
             <Card.Footer>

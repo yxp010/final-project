@@ -10,6 +10,7 @@ class EventList extends Component {
 
     constructor(props) {
         super(props)
+
         this.state = {
             loading: true,
             time: props.time
@@ -18,28 +19,35 @@ class EventList extends Component {
     
 
     componentDidMount() {
-        fetch(userTimeEvents(this.props.time))
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                loading: false,
-                events: data.events
-            })
-        })
-    }
-    // showCard = id => {
-    componentDidUpdate(prevProps, prevState) {
-
-        if (prevProps.time !== this.props.time) {
+        if (!!this.props.time) {
+            debugger
             fetch(userTimeEvents(this.props.time))
             .then(res => res.json())
             .then(data => {
+                debugger
                 this.setState({
                     loading: false,
-                    events: data.events,
-                    time: this.props.time
+                    events: data.events
                 })
             })
+        } else {
+            this.setState({loading: false})
+        }
+    }
+    // showCard = id => {
+    componentDidUpdate(prevProps, prevState) {
+        if (!!this.props.time) {
+            if (prevProps.time !== this.props.time) {
+                fetch(userTimeEvents(this.props.time))
+                .then(res => res.json())
+                .then(data => {
+                    this.setState({
+                        loading: false,
+                        events: data.events,
+                        time: this.props.time
+                    })
+                })
+            }
         }
     }
 
@@ -80,7 +88,12 @@ class EventList extends Component {
     }
     renderLists = () => {
         // debugger
-        return this.state.events.map(e => <EventListItem {...e} handleCancel={this.handleCancel} eventtype={this.props.eventtype} key={e.id} />)
+        if (!!this.props.time) {
+            return this.state.events.map(e => <EventListItem {...e} handleCancel={this.handleCancel} eventtype={this.props.eventtype} key={e.id} />)
+        } else {
+            return this.props.events.map(e => <EventListItem {...e} eventtype={this.props.eventtype} key={e.id} />)
+        }
+        
     }
     
     render() {
@@ -90,10 +103,10 @@ class EventList extends Component {
         return this.state.loading ?
             <LoadingAnimation />
             : 
-            this.state.events.length === 0 ?
+            (this.state.events && this.state.events.length === 0) || (!!this.props.events && this.props.events.length === 0) ?
             <h1>No games yet</h1>
             :
-            <ListGroup >
+            <ListGroup style={{...this.props.style}}>
                 {this.renderLists()}
             </ListGroup>
     }

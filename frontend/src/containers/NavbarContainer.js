@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import CreateModal from '../components/CreateModal'
 // import Button from 'react-bootstrap/Button'
 
 import { Link } from 'react-router-dom'
@@ -15,6 +16,12 @@ import { login, logout } from '../actions/users'
 import { checkLogin, logoutURL } from '../urls'
 
 class NavbarContainer extends Component {
+
+    state = {
+        showModal: false
+    }
+
+
 
     componentDidMount() {
         fetch(checkLogin, {
@@ -49,6 +56,12 @@ class NavbarContainer extends Component {
         })
     }
 
+    modalClose = () => {
+        this.setState({ 
+          showModal: false
+        })
+      };
+
     render() {
         return <div className='nav-bar'>
         <Navbar collapseOnSelect expand="lg" style={{backgroundColor: '#101D2E'}} variant="dark">
@@ -58,10 +71,11 @@ class NavbarContainer extends Component {
                 <Nav className="mr-auto">
                 </Nav>
                 <Nav>
-                    <NavDropdown title="Create" id="collasible-nav-dropdown">
-                        <Link to='/new_group' className='dropdown-item'>New Group</Link>
-                        <Link to='/new_game' className='dropdown-item'>New Game</Link>
-                    </NavDropdown>
+                    {/* <NavDropdown title="Create" id="collasible-nav-dropdown">
+                        <Link to='/create/group' className='dropdown-item'>New Group</Link>
+                        <Link to='/create/group' className='dropdown-item'>New Game</Link>
+                    </NavDropdown> */}
+                    <Nav.Link href="#" onClick={() => this.setState({showModal: true})}>Create</Nav.Link>
                         <Link to='/explore' className='nav-link'>Explore</Link>
                         {this.props.loggedIn 
                         ?
@@ -86,6 +100,7 @@ class NavbarContainer extends Component {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+            { this.state.showModal ? <CreateModal show={this.state.showModal} onHide={this.modalClose}/> : null}
         </div>
     }
     

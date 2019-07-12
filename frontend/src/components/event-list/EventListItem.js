@@ -13,7 +13,7 @@ class EventListItem extends PureComponent {
 
     render() {
         console.log(this.props)
-        const { eventtype, id } = this.props
+        const { eventtype, id, handleCancel } = this.props
         return(
             <React.Fragment>
                 <div style={{marginBottom: '10px'}}>
@@ -22,7 +22,7 @@ class EventListItem extends PureComponent {
                         <span style={{fontSize: '18px'}}>{this.props.location}</span><br></br>
                         <span style={{fontSize: '18px'}}>{this.props.date}</span>
                     </ListGroup.Item>
-                    <Button variant="danger" size="lg" style={{width: '100%'}} onClick={() => this.props.handleCancel(eventtype, id)}>Cancel</Button>
+                    {!!handleCancel ? <Button variant="danger" size="lg" style={{width: '100%'}} onClick={() => handleCancel(eventtype, id)}>Cancel</Button> : null}
                     {this.state.modalShow ? <GameModal show={this.state.modalShow} showfooter={'false'} onHide={this.modalClose} info={this.props}/> : null}
                 </div>
             </React.Fragment>

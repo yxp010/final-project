@@ -1,7 +1,12 @@
+
 export const baseURL = 'http://localhost:3001/'
 export const users = 'http://localhost:3001/users'
 export const loginURL = 'http://localhost:3001/auth/login'
 export const checkLogin = 'http://localhost:3001/login_check'
+
+// Types
+export const allTypeUrl = 'http://localhost:3001/types'
+
 // Near events
 export const nearEventsURL = 'http://localhost:3001/near_events'
 export const initialDiscoverURL = 'http://localhost:3001/discover_games_or_groups'
@@ -10,7 +15,7 @@ export const fetchEventsURL = 'http://localhost:3001/fetch_events_on_discover'
 // Join group / games / tournaments
 export const joinGroup = 'http://localhost:3001/applies'
 export const joinGame = 'http://localhost:3001/events/join'
-
+export const createGame = 'http://localhost:3001/events'
 // User Profile Page Routes
 export const profile = 'http://localhost:3001/user/profile'
 // User past||upcomming events

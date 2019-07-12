@@ -89,7 +89,7 @@ class GroupShowPage extends PureComponent {
                         <h2>lat: {this.state.group.lat}</h2>
                         <h2>lng: {this.state.group.lng}</h2>
                         <h2>location: {this.state.group.location}</h2>
-                        <Button disabled={this.state.disableJoin} onClick={this.handleJoin} variant="outline-primary">Primary</Button>
+                        <Button disabled={this.state.disableJoin} onClick={this.handleJoin} variant="outline-primary">Join</Button>
                         <SubPage group={this.state.group} upcomingEvents={this.state.upcomingEvents}/>
                     </div>
                     : <LoadingAnimation />

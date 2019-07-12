@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_144320) do
     t.string "state"
     t.string "zip_code"
     t.string "type_name"
+    t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_144320) do
     t.float "lng"
     t.string "zip_code"
     t.string "type_name"
+    t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

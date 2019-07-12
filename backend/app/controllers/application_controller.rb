@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     skip_before_action :verify_authenticity_token
 
     before_action :authorize_request
-    skip_before_action :authorize_request, only: [:check_login, :near_events]
+    skip_before_action :authorize_request, only: [:check_login, :near_events, :types, :near_events_on_discover, :fetch_events_on_discover]
     include ::ActionController::Cookies
 
     def not_found
@@ -98,13 +98,14 @@ class ApplicationController < ActionController::Base
         arr = []
         searchTerm = ''
         searchTerm = params[:searchTerm] if !!params[:searchTerm]
-        
+        # byebug
         classname.constantize.all.each do |row|
-            if classname = 'Group' 
+            if classname == 'Group' 
                 arr.push(row) if row.city == city && row.state == state && row.name.split.map(&:capitalize).join().include?(searchTerm.split.map(&:capitalize).join())
                 break if arr.count == count
             else
-                arr.push(row) if row.city == city && row.state == state && Time.zone.now.to_datetime && row.name.split.map(&:capitalize).join().include?(searchTerm.split.map(&:capitalize).join())
+                
+                arr.push(row) if row.city == city && row.state == state && row.date > Time.zone.now.to_datetime && row.name.split.map(&:capitalize).join().include?(searchTerm.split.map(&:capitalize).join())
                 break if arr.count == count
             end
         end
@@ -115,5 +116,12 @@ class ApplicationController < ActionController::Base
         end
         
         arr
+    end
+
+    def types
+
+        @types = Type.all
+        render json: {types: @types}
+
     end
 end

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :groups
   resources :applies, only: [:create]
 
+  #types
+  get '/types', to: 'application#types'
+
   # NEAR EVENTS (GROUPS, TOURNAMENTS, GAMES)
   post '/near_events', to: 'application#near_events'
   post '/discover_games_or_groups', to: 'application#near_events_on_discover'

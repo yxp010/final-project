@@ -18,6 +18,7 @@ class Group extends PureComponent {
         fetch(userGroups)
         .then(res => res.json())
         .then(data => {
+            // debugger
             this.setState({
                 groups: data.groups,
                 loading: false

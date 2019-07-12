@@ -8,7 +8,7 @@ const renderCards = (groups, type, handleLeaveGroup) => {
     const groupsNeed = 3 - groups.length
     const cards = []
     groups.forEach(group => {
-        cards.push(<GroupCard handleLeaveGroup={handleLeaveGroup} showfooter='false' key={group.id} {...group} type={type} />)
+        cards.push(<GroupCard handleLeaveGroup={handleLeaveGroup} showfooter={'groupdeck'} key={group.id} {...group} type={type} />)
     });
     for (let i = 0; i < groupsNeed; i++) {
         cards.push(EmptyCard())
@@ -19,11 +19,11 @@ const renderCards = (groups, type, handleLeaveGroup) => {
 const GroupDeck = props => {
     // debugger
     return(
-        <div className='card-deck-container'>
-            <CardDeck >
+        <div className='card-deck-container' style={{padding: '100px'}}>
+            <CardDeck style={{width: '100%'}}>
                 {props.groups.length === 3
                 ? 
-                props.groups.map(group => <GroupCard handleLeaveGroup={props.handleLeaveGroup} showfooter='false' key={group.id} {...group} type={props.type} />)
+                props.groups.map(group => <GroupCard handleLeaveGroup={props.handleLeaveGroup} eventtype='groups' showfooter={'groupdeck'} key={group.id} {...group} type={props.type} />)
                 :
                 renderCards(props.groups, props.type, props.handleLeaveGroup)
                 }

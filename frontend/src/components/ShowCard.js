@@ -3,7 +3,6 @@ import CardInfo from '../components/CardInfo'
 import GameModal from './GameModal'
 
 class ShowCard extends React.Component {
-
   state = {
     modalShow: false
   }
@@ -16,6 +15,7 @@ class ShowCard extends React.Component {
   
   showModal = () => {this.setState({modalShow: true})}
   render() {
+    // debugger
     return (
       <React.Fragment>
       <CardInfo showModal={this.showModal} {...this.props}/>

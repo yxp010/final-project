@@ -76,6 +76,7 @@ class UsersController < ApplicationController
     def upcoming_events
         if login?
             @upcoming_events = @current_user.upcoming_events
+            # byebug
             render json: {events: @upcoming_events}
         else 
             render json: {error: 'not logged in'}, status: :unauthorized

@@ -9,23 +9,22 @@ import ShowCard from '../components/ShowCard'
 const SeeAll = (props) => <Link to={props.url} className='see-all'>See all</Link>
 
 const NearbyCardDeck = props => {
-
+    // debugger
     return(
         <div className='card-deck-container'>
+          <CardDeck style={{width: '100%'}}>
           <div className='card-deck-info-container'>
             <h3 style={{marginLeft: '15px'}}>{props.title} near you</h3>
             <SeeAll url='/explore'/>
           </div>
-          <CardDeck >
               {!!props.nearByLocations 
               ? 
-              props.nearByLocations[props.type].map(card => <ShowCard showfooter='true' eventtype={props.type} key={card.id} {...card} type={props.type} />)
+              props.nearByLocations[props.type].map(card => <ShowCard showfooter={props.type === 'games'} eventtype={props.type} key={card.id} {...card} type={props.type} />)
               :
-              // [1,2,3].map(n => <ShowCard key={n}/>)
               null
               }
           </CardDeck>
-            </div>
+        </div>
     )
 }
 
