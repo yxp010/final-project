@@ -16,10 +16,9 @@ class GroupCard extends PureComponent {
   
   showModal = () => {this.setState({modalShow: true})}
   render() {
-    // debugger
     return (
       <React.Fragment>
-      <CardInfo showModal={this.showModal} eventtype={this.props.eventtype} isGroupCard='true' {...this.props}/>
+      <CardInfo showModal={this.showModal} isGroupCard='true' {...this.props}/>
       {this.state.modalShow ? <GroupModal handleLeaveGroup={this.props.handleLeaveGroup} show={this.state.modalShow} onHide={this.modalClose} {...this.props}/> : null}
       </React.Fragment>
   )

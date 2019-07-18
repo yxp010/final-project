@@ -41,7 +41,7 @@ export default class CardInfo extends PureComponent {
           <Card.Subtitle className="mb-2 text-muted">{this.formatTypeName()}</Card.Subtitle>
           <h2>{this.props.name}</h2>
           <Card.Text>
-             {this.props.type === 'groups' ?
+             {this.isGroupCard() ?
                 `${this.state.usersCount} people in this group.`
               :
                 `${this.state.usersCount} people will come to this game.`

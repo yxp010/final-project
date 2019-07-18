@@ -23,7 +23,7 @@ const GroupDeck = props => {
             <CardDeck style={{width: '100%'}}>
                 {props.groups.length === 3
                 ? 
-                props.groups.map(group => <GroupCard handleLeaveGroup={props.handleLeaveGroup} eventtype='groups' showfooter={'groupdeck'} key={group.id} {...group} type={props.type} />)
+                props.groups.map(group => <GroupCard handleLeaveGroup={props.handleLeaveGroup} key={group.id} {...group} type={props.type} />)
                 :
                 renderCards(props.groups, props.type, props.handleLeaveGroup)
                 }

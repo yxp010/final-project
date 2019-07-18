@@ -123,14 +123,15 @@ class ApplicationController < ActionController::Base
         searchTerm = params[:searchTerm] if !!params[:searchTerm]
         if classname == 'Group'
             # byebug
-            arr = Group.all.where(city: city, state: state).select {|group| group.name.upcase.include?(searchTerm.upcase)}[0, count]
+            if params[:eventType] == 'All types' || !params[:eventType]
+                arr = Group.all.where(city: city, state: state).select {|group| group.name.upcase.include?(searchTerm.upcase)}
+            else
+                arr = Group.all.where(city: city, state: state, type_name: params[:eventType]).select {|group| group.name.upcase.include?(searchTerm.upcase)}
+            end
+            arr = arr[0, count]
         else
             if params[:eventType] == 'All types' || !params[:eventType]
-                if params[:eventType]
-                    arr = Event.all.where(city: city, state: state).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
-                else
-                    arr = Event.all.where(city: city, state: state).select {|event| event.date > Time.zone.now.to_datetime}
-                end
+                arr = Event.all.where(city: city, state: state).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
             else
                 arr = Event.all.where(city: city, state: state, type_name: params[:eventType]).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
             end
