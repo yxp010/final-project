@@ -38,8 +38,9 @@ export default class NewGame extends React.Component {
     }
 
     handleSelectType = e => {
+        // debugger
         this.setState({
-            type: e.target.value
+            type: parseInt(e.target.value)
         })
     }
 
@@ -93,7 +94,7 @@ export default class NewGame extends React.Component {
           </Form.Group>
           <Form.Group>
           <Form.Label>Select a type</Form.Label>
-            <Form.Control onChange={(e) => console.log(e.target.value)} as="select">
+            <Form.Control onChange={this.handleSelectType} as="select">
             {!!this.props.types ? this.props.types.map(t => <option value={t.id}>{t.name}</option>) : null}
         </Form.Control>
         </Form.Group>

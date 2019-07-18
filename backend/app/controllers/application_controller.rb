@@ -28,6 +28,18 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    # based on login give different user experience
+    def login_check
+        header = cookies.signed[:jwt]
+        @decoded = JsonWebToken.decode(header)
+
+        if @decoded == 'FAILED' 
+            return false
+        else
+            return true
+        end
+    end
+
     def login?
         !!@current_user
     end
@@ -72,9 +84,13 @@ class ApplicationController < ActionController::Base
     end
 
     def near_events_on_discover
-        if login? 
+        header = cookies.signed[:jwt]
+        @decoded = JsonWebToken.decode(header)
+        if @decoded != 'FAILED' 
+            @current_user = User.find(@decoded[:user_id])
             self.discoverGamesGroups(@current_user.city, @current_user.state)
         else
+            # byebug
             self.discoverGamesGroups('Houston', 'TX')
         end
     end
@@ -98,22 +114,36 @@ class ApplicationController < ActionController::Base
         arr = []
         searchTerm = ''
         searchTerm = params[:searchTerm] if !!params[:searchTerm]
-        # byebug
-        classname.constantize.all.each do |row|
-            if classname == 'Group' 
-                arr.push(row) if row.city == city && row.state == state && row.name.split.map(&:capitalize).join().include?(searchTerm.split.map(&:capitalize).join())
-                break if arr.count == count
+        if classname == 'Group'
+            arr = Group.all.where(city: city, state: state).select {|group| group.name.upcase.include?(searchTerm.upcase)}.limit(count)
+        else 
+            if params[:eventType] == 'All types'
+                arr = Event.all.where(city: city, state: state).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
             else
-                
-                arr.push(row) if row.city == city && row.state == state && row.date > Time.zone.now.to_datetime && row.name.split.map(&:capitalize).join().include?(searchTerm.split.map(&:capitalize).join())
-                break if arr.count == count
+                arr = Event.all.where(city: city, state: state, type_name: params[:eventType]).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
             end
+            # byebug
+            arr = arr.sort_by(&:date).reverse
         end
-        
-        arr.sort_by(&:date).reverse if classname == 'Event'
-        if !!params[:eventType]
-            arr = arr.select {|i| i.type.name == params[:eventType]} unless params[:eventType] == 'All types'
-        end
+        ## old method
+        # classname.constantize.all.each do |row|
+        #     if classname == 'Group' 
+        #         arr.push(row) if row.city == city && row.state == state && row.name.upcase.include?(searchTerm.upcase)
+        #         break if arr.count == count
+        #     else
+        #         if params[:eventType] == 'All types'
+        #             arr.push(row) if row.city == city && row.state == state && row.date > Time.zone.now.to_datetime && row.name.upcase.include?(searchTerm.upcase)
+        #         else
+        #             arr.push(row) if row.type_name == params[:eventType] && row.city == city && row.state == state && row.date > Time.zone.now.to_datetime && row.name.upcase.include?(searchTerm.upcase)
+        #         end
+        #         break if arr.count == count
+        #     end
+        # end
+        # debugger
+        # arr.sort_by(&:date).reverse if classname == 'Event'
+        # if !!params[:eventType] && params[:eventType] != 'All types'
+        #     arr = arr.select {|i| i.type.name == params[:eventType]}
+        # end
         
         arr
     end
