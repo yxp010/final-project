@@ -26,7 +26,7 @@ class ShowCard extends React.Component {
       <React.Fragment>
       <CardInfo isGroupCard={this.isGroupCard()} showModal={this.showModal} {...this.props}/>
       {this.state.modalShow ? 
-          this.props.eventtype == 'games' ?
+          this.props.eventtype === 'games' ?
           <GameModal show={this.state.modalShow} onHide={this.modalClose} info={this.props}/> 
           : <GroupModal show={this.state.modalShow} onHide={this.modalClose} {...this.props}/> 
           : null}

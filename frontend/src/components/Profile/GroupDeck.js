@@ -1,5 +1,4 @@
 import CardDeck from 'react-bootstrap/CardDeck'
-import { Link } from 'react-router-dom'
 import React from 'react'
 import GroupCard from '../GroupCard'
 const EmptyCard = () => <div className='card' style={{border: 'none'}}></div>
