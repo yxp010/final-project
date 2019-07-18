@@ -64,7 +64,10 @@ class ApplicationController < ActionController::Base
     end
 
     def near_events
-        if login? 
+        header = cookies.signed[:jwt]
+        @decoded = JsonWebToken.decode(header)
+        if @decoded != 'FAILED' 
+            @current_user = User.find(@decoded[:user_id])
             self.findGamesGroups(@current_user.city, @current_user.state)
         else
             self.findGamesGroups('Houston', 'TX')
@@ -72,7 +75,7 @@ class ApplicationController < ActionController::Base
     end
 
     def findGamesGroups(city, state)
-        @groups = self.find_near('Group', params[:groups_count], city, state) if !!params[:group] 
+        @groups = self.find_near('Group', params[:events_count], city, state) if !!params[:group] 
         @games = self.find_near('Event', params[:events_count], city, state) if !!params[:event]
         @types = Type.all.map {|t| t.name}
         if @groups && @games
@@ -102,49 +105,38 @@ class ApplicationController < ActionController::Base
     def discoverGamesGroups(city, state)
         @types = Type.all.map {|t| t.name}
         if params[:type] == 'groups'
-            @groups = self.find_near('Group', params[:groups_count], city, state)
+            @groups = self.find_near('Group', params[:events_count], city, state)
             render json: {groups: @groups, types: @types, city: city, state: state, type: 'groups'}
         else
             @games = self.find_near('Event', params[:events_count], city, state)
             render json: {games: @games, types: @types, city: city, state: state, type: 'games'}
         end
     end
+
+    # def near_events_home
+
+    # end
     
     def find_near(classname, count, city, state) 
         arr = []
         searchTerm = ''
         searchTerm = params[:searchTerm] if !!params[:searchTerm]
         if classname == 'Group'
-            arr = Group.all.where(city: city, state: state).select {|group| group.name.upcase.include?(searchTerm.upcase)}.limit(count)
-        else 
-            if params[:eventType] == 'All types'
-                arr = Event.all.where(city: city, state: state).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
+            # byebug
+            arr = Group.all.where(city: city, state: state).select {|group| group.name.upcase.include?(searchTerm.upcase)}[0, count]
+        else
+            if params[:eventType] == 'All types' || !params[:eventType]
+                if params[:eventType]
+                    arr = Event.all.where(city: city, state: state).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
+                else
+                    arr = Event.all.where(city: city, state: state).select {|event| event.date > Time.zone.now.to_datetime}
+                end
             else
                 arr = Event.all.where(city: city, state: state, type_name: params[:eventType]).select {|event| event.date > Time.zone.now.to_datetime && event.name.upcase.include?(searchTerm.upcase)}
             end
             # byebug
-            arr = arr.sort_by(&:date).reverse
+            arr = arr.sort_by(&:date)[0, count]
         end
-        ## old method
-        # classname.constantize.all.each do |row|
-        #     if classname == 'Group' 
-        #         arr.push(row) if row.city == city && row.state == state && row.name.upcase.include?(searchTerm.upcase)
-        #         break if arr.count == count
-        #     else
-        #         if params[:eventType] == 'All types'
-        #             arr.push(row) if row.city == city && row.state == state && row.date > Time.zone.now.to_datetime && row.name.upcase.include?(searchTerm.upcase)
-        #         else
-        #             arr.push(row) if row.type_name == params[:eventType] && row.city == city && row.state == state && row.date > Time.zone.now.to_datetime && row.name.upcase.include?(searchTerm.upcase)
-        #         end
-        #         break if arr.count == count
-        #     end
-        # end
-        # debugger
-        # arr.sort_by(&:date).reverse if classname == 'Event'
-        # if !!params[:eventType] && params[:eventType] != 'All types'
-        #     arr = arr.select {|i| i.type.name == params[:eventType]}
-        # end
-        
         arr
     end
 

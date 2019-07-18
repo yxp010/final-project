@@ -46,7 +46,6 @@ class Home extends PureComponent {
   componentDidMount() {
     // if (!this.props.latLng) this.askLocation()
     this.props.setLocation(null, {
-      groups_count: 3,
       events_count: 3,
       group: true,
       event: true,
