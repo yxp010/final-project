@@ -20,11 +20,11 @@ class EventList extends Component {
 
     componentDidMount() {
         if (!!this.props.time) {
-            debugger
+            // debugger
             fetch(userTimeEvents(this.props.time))
             .then(res => res.json())
             .then(data => {
-                debugger
+                // debugger
                 this.setState({
                     loading: false,
                     events: data.events
@@ -88,8 +88,10 @@ class EventList extends Component {
     }
     renderLists = () => {
         // debugger
-        if (!!this.props.time) {
+        if (this.props.time === 'upcoming') {
             return this.state.events.map(e => <EventListItem {...e} handleCancel={this.handleCancel} eventtype={this.props.eventtype} key={e.id} />)
+        } else if (this.props.time === 'past') {
+            return this.state.events.map(e => <EventListItem pastEvent='true' {...e} eventtype={this.props.eventtype} key={e.id} />)
         } else {
             return this.props.events.map(e => <EventListItem {...e} eventtype={this.props.eventtype} key={e.id} />)
         }

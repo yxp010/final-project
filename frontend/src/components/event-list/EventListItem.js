@@ -23,7 +23,7 @@ class EventListItem extends PureComponent {
                         <span style={{fontSize: '18px'}}>{this.props.date}</span>
                     </ListGroup.Item>
                     {!!handleCancel ? <Button variant="danger" size="lg" style={{width: '100%'}} onClick={() => handleCancel(eventtype, id)}>Cancel</Button> : null}
-                    {this.state.modalShow ? <GameModal show={this.state.modalShow} showfooter={'false'} onHide={this.modalClose} info={this.props}/> : null}
+                    {this.state.modalShow ? <GameModal show={this.state.modalShow} isPastEvent={this.props.pastEvent} onHide={this.modalClose} info={this.props}/> : null}
                 </div>
             </React.Fragment>
         )

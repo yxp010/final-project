@@ -41,10 +41,6 @@ class GameModal extends PureComponent {
       })
     }
 
-    // checkShowFooter = () => {
-    //   return this.props.showfooter === 'true' ? true : false
-    // }
-
     handleJoin = () => {
       fetch(baseURL + `/${this.props.info.eventtype}/join`, {
         method: 'POST',
@@ -85,8 +81,6 @@ class GameModal extends PureComponent {
     }
 
     render() {
-      // console.log(this.props)
-      // debugger
       return (
         <Modal
             {...this.props}
@@ -115,35 +109,15 @@ class GameModal extends PureComponent {
           
         </Modal.Body>
         {
-            this.props.showfooter === 'groupdeck' ? 
+            this.props.isPastEvent ?
             null
-            :
-            this.props.showfooter ?
-              <Modal.Footer>
-              <h1>Join?</h1>
-              <Button onClick={this.handleJoin}>YES</Button>
-              <Button onClick={this.handleCancelJoin}>NO</Button>
-            </Modal.Footer>
-            : 
-            
-            <Modal.Footer>
-              <Button onClick={() => {this.props.history.push(`/groups/${this.props.info.id}`)}}>Detail</Button>
-            </Modal.Footer>
-            
-              
-          }
-        
-        {
-          !!this.props.handleLeaveGroup ?
-          <Modal.Footer>
-            <Button variant="primary" onClick={() => window.location.assign(`/groups/${this.props.info.id}`)}>Detail</Button>
-            <Button variant="danger" onClick={() => this.props.handleLeaveGroup(this.props.info.id)}>Leave Group</Button>
-        </Modal.Footer>
           : 
           <Modal.Footer>
-            <Button variant="primary" onClick={() => window.location.assign(`/groups/${this.props.info.id}`)}>Detail</Button>
-        </Modal.Footer>
-        }
+            <h1>Join?</h1>
+            <Button onClick={this.handleJoin}>YES</Button>
+            <Button onClick={this.handleCancelJoin}>NO</Button>
+          </Modal.Footer> 
+          }
       </Modal>
       );
     }
