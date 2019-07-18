@@ -33,6 +33,7 @@ export default class CardInfo extends PureComponent {
     }
 
     render() {
+      // debugger
         return( 
         <div onClick={this.props.showModal} className='card' style={{marginLeft: '27px', marginRight: '27px', cursor: 'pointer'}}>
         <Card.Img variant="top" src={this.props.img_url} style={{height: '305px'}} alt='Some img here'/>
@@ -47,7 +48,7 @@ export default class CardInfo extends PureComponent {
               }
           </Card.Text>
         </Card.Body>
-        {this.props.type === 'groups' ?
+        {this.props.type === 'groups' || !this.props.type ?
             null
         :
             <Card.Footer>

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import CardInfo from './CardInfo'
-import GameModal from './GameModal'
+import GroupModal from './GroupModal'
 
 class GroupCard extends PureComponent {
 
@@ -20,7 +20,7 @@ class GroupCard extends PureComponent {
     return (
       <React.Fragment>
       <CardInfo showModal={this.showModal} eventtype={this.props.eventtype} isGroupCard='true' {...this.props}/>
-      {this.state.modalShow ? <GameModal handleLeaveGroup={this.props.handleLeaveGroup} show={this.state.modalShow} showfooter={this.props.showfooter} onHide={this.modalClose} info={this.props}/> : null}
+      {this.state.modalShow ? <GroupModal handleLeaveGroup={this.props.handleLeaveGroup} show={this.state.modalShow} onHide={this.modalClose} {...this.props}/> : null}
       </React.Fragment>
   )
   }

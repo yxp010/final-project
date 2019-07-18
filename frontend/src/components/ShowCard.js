@@ -1,6 +1,7 @@
 import React from 'react'
 import CardInfo from '../components/CardInfo'
 import GameModal from './GameModal'
+import GroupModal from './GroupModal'
 
 class ShowCard extends React.Component {
   state = {
@@ -19,7 +20,11 @@ class ShowCard extends React.Component {
     return (
       <React.Fragment>
       <CardInfo showModal={this.showModal} {...this.props}/>
-      {this.state.modalShow ? <GameModal show={this.state.modalShow} showfooter={this.props.showfooter} onHide={this.modalClose} info={this.props}/> : null}
+      {this.state.modalShow ? 
+          this.props.eventtype == 'games' ?
+          <GameModal show={this.state.modalShow} onHide={this.modalClose} info={this.props}/> 
+          : <GroupModal show={this.state.modalShow} onHide={this.modalClose} {...this.props}/> 
+          : null}
       </React.Fragment>
   )
   }
