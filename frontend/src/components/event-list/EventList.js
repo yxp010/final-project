@@ -89,9 +89,9 @@ class EventList extends Component {
     renderLists = () => {
         // debugger
         if (this.props.time === 'upcoming') {
-            return this.state.events.map(e => <EventListItem {...e} handleCancel={this.handleCancel} eventtype={this.props.eventtype} key={e.id} />)
+            return this.state.events.map(e => <EventListItem isInProfile='true' {...e} handleCancel={this.handleCancel} eventtype={this.props.eventtype} key={e.id} />)
         } else if (this.props.time === 'past') {
-            return this.state.events.map(e => <EventListItem pastEvent='true' {...e} eventtype={this.props.eventtype} key={e.id} />)
+            return this.state.events.map(e => <EventListItem isInProfile='true' {...e} eventtype={this.props.eventtype} key={e.id} />)
         } else {
             return this.props.events.map(e => <EventListItem {...e} eventtype={this.props.eventtype} key={e.id} />)
         }

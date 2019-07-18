@@ -109,7 +109,7 @@ class GameModal extends PureComponent {
           
         </Modal.Body>
         {
-            this.props.isPastEvent ?
+            this.props.isInProfile ?
             null
           : 
           <Modal.Footer>

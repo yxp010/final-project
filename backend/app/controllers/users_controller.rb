@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     def leave_group
         if login?
             @joined = GroupsUser.find_by(user_id: @current_user.id, group_id: params[:id])
-
+            # byebug
             if @joined 
                 if @joined.group.founder_id == @current_user.id 
                     render json: {error: "Cannot leave group that you created, you can delete the group in 'groups created by you' in menu on the left."}, status: 400

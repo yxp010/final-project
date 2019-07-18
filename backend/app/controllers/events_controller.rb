@@ -3,7 +3,7 @@ class EventsController < ApplicationController
     skip_before_action :authorize_request, only: [:explore_games]
 
     def index 
-        @events = Group.all
+        @events = Event.all
         render json: @events
     end
 
@@ -20,14 +20,13 @@ class EventsController < ApplicationController
     end
 
     def show
-        @event = Group.find(params[:id])
+        @event = Event.find(params[:id])
         render json: @event
     end
 
     def users
-        @event = Group.find(params[:id])
+        @event = Event.find(params[:id])
         @users = @event.users
-
         render json: {users: @users}
     end
 

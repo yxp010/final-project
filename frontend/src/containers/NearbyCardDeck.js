@@ -19,7 +19,7 @@ const NearbyCardDeck = props => {
           </div>
               {!!props.nearByLocations 
               ? 
-              props.nearByLocations[props.type].map(card => <ShowCard showfooter={props.type === 'games'} eventtype={props.type} key={card.id} {...card} type={props.type} />)
+              props.nearByLocations[props.type].map(card => <ShowCard eventtype={props.type} key={card.id} {...card} type={props.type} />)
               :
               null
               }

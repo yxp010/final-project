@@ -45,7 +45,7 @@ class GroupModal extends PureComponent {
         <Button onClick={this.handleClickDetail}>Detail</Button>
         {
             this.props.handleLeaveGroup ?
-            <Button onClick={this.props.handleLeaveGroup} variant="danger">Leave Group</Button>
+            <Button onClick={() => this.props.handleLeaveGroup(this.props.id)} variant="danger">Leave Group</Button>
           : 
           null
           }
