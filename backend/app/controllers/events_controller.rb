@@ -9,7 +9,6 @@ class EventsController < ApplicationController
 
     def create
         if login?
-            # byebug
             @event = Event.new(event_params)
             @event.founder_id = @current_user.id
             @event.save
@@ -73,13 +72,13 @@ class EventsController < ApplicationController
     end
 
     def format_time
-        minute = params[:time].split(':')[2].to_i
+        minute = params[:time].split(':')[1].to_i
         hour = params[:time].split(':')[0].to_i
         # byebug
         return {minute: minute, hour: hour}
     end
 
     def event_params
-        return {name: params[:name], location: params[:location], description: params[:description], lat: params[:lat], lng: params[:lng], type_id: params[:type], date: DateTime.new(params[:year], params[:month], params[:day], self.format_time[:hour], self.format_time[:minute]), city: params[:city], state: params[:state]}
+        return {name: params[:name], location: params[:location], description: params[:description], lat: params[:lat], lng: params[:lng], type_id: params[:type], date: DateTime.new(params[:year], params[:month], params[:day], self.format_time[:hour], self.format_time[:minute]), city: params[:city], state: params[:state], img_url: params[:img_url]}
     end
 end

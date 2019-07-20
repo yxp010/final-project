@@ -17,7 +17,9 @@ export default class NewGame extends React.Component {
             year: newDate.getFullYear(),
             month: newDate.getMonth() + 1,
             day: newDate.getDate(),
-            type: 1
+            type: 1,
+            desicription: '',
+            img_url: ''
         }
     }
     
@@ -36,7 +38,7 @@ export default class NewGame extends React.Component {
             date: date,
             year: year,
             month: month,
-            day: date
+            day: day
          })
         
     }
@@ -85,7 +87,9 @@ export default class NewGame extends React.Component {
                     state: data.results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name,
                     lat: data.results[0].geometry.location.lat,
                     lng: data.results[0].geometry.location.lng,
-                    zip_code: data.results[0].address_components.find(c => c.types.find(t => t === "postal_code")).short_name
+                    zip_code: data.results[0].address_components.find(c => c.types.find(t => t === "postal_code")).short_name,
+                    desicription: this.state.desicription,
+                    img_url: this.state.img_url
                 })
             })
         }})
@@ -93,7 +97,7 @@ export default class NewGame extends React.Component {
 
     render() {
         // debugger
-        console.log(this.state.year)
+        console.log(this.state.time)
         return <React.Fragment>
             <TimePicker onChange={this.timeOnChange} value={this.state.time}/>
       <DatePicker onChange={this.dateOnChange} value={this.state.date}/>
@@ -115,7 +119,14 @@ export default class NewGame extends React.Component {
           <Form.Label>Location</Form.Label>
           <Form.Control onChange={this.handleChange} name='location' placeholder="1234 Main St" />
         </Form.Group>
-        
+        <Form.Group >
+          <Form.Label>Image Url</Form.Label>
+          <Form.Control onChange={this.handleChange} name='img_url' />
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Description</Form.Label>
+            <Form.Control name='desicription' onChange={this.handleChange} as="textarea" rows="3" />
+        </Form.Group>
       
         <Button variant="primary" type="submit">
           Submit
