@@ -23,12 +23,22 @@ export default class NewGame extends React.Component {
     
 
     dateOnChange = date => {
+        // debugger
+        let year
+        let month
+        let day
+        if (date) {
+            year = date.getFullYear()
+            month = date.getMonth() + 1
+            day = date.getDate() + 1
+        } 
         this.setState({ 
             date: date,
-            year: date.getFullYear(),
-            month: date.getMonth() + 1,
-            day: date.getDate()
+            year: year,
+            month: month,
+            day: date
          })
+        
     }
     timeOnChange = time => this.setState({ time })
     handleChange = e => {
@@ -83,6 +93,7 @@ export default class NewGame extends React.Component {
 
     render() {
         // debugger
+        console.log(this.state.year)
         return <React.Fragment>
             <TimePicker onChange={this.timeOnChange} value={this.state.time}/>
       <DatePicker onChange={this.dateOnChange} value={this.state.date}/>
