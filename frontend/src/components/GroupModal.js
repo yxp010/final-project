@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Map from '../components/Map'
 
 class GroupModal extends PureComponent {
 

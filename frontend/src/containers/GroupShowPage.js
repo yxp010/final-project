@@ -81,14 +81,10 @@ class GroupShowPage extends PureComponent {
                 <div>
                     {!!this.state.group ?
                     <div>
-                        <ImageBox img='https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/ironman-spiderman-homecoming-poster-frontpage-700x354.jpg'/>
+                        <ImageBox img={this.state.group.img_url}/>
                         <h2>{this.state.group.city}, {this.state.group.state}</h2>
-                        <h2>{this.state.members.length} members</h2>
-                        <h2>Created by {this.state.founder.username}</h2>
-                        <h2>description: {this.state.group.description}</h2>
-                        <h2>lat: {this.state.group.lat}</h2>
-                        <h2>lng: {this.state.group.lng}</h2>
-                        <h2>location: {this.state.group.location}</h2>
+                        <h2>{this.state.members.length} member(s)</h2>
+                        <h2>Created by <a href='#'>{this.state.founder.username}</a></h2>
                         <Button disabled={this.state.disableJoin} onClick={this.handleJoin} variant="outline-primary">Join</Button>
                         <SubPage group={this.state.group} upcomingEvents={this.state.upcomingEvents}/>
                     </div>
