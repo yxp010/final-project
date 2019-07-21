@@ -46,7 +46,7 @@ class Explore extends Component {
       if (currentGroups.length > 0) {
           decks.push(<GroupDeck groups={currentGroups}/>)
       } 
-      return decks
+      return decks.length === 0 ? <h1>No groups yet</h1> : decks
   }
 
     SearchBoxWillMount = () => {

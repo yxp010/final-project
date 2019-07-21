@@ -27,13 +27,11 @@ class GroupModal extends PureComponent {
           </h1>
         </Modal.Header>
         <Modal.Body>
-            <div className='map'>
-                <Map 
-                    center={{lat: this.props.lat, lng: this.props.lng}} 
-                    isMarkerShown 
-                />
-            </div>
-          <Button onClick={this.showDirection}>show direction</Button>
+            {/* <div style={{maxHeight: '400px', height: '100vh', width: '100%', backgroundSize: 'cover'}}>
+                
+            </div> */}
+            <img src={this.props.img_url} alt='group image' style={{width: '100%'}}/>
+          {/* <Button onClick={this.showDirection}>show direction</Button> */}
           <h4>Hosted by {}</h4>
           {/* <h4>{date}</h4> */}
           <p>
