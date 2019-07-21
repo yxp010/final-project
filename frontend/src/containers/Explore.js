@@ -217,7 +217,6 @@ class Explore extends Component {
                           outline: `none`,
                           textOverflow: `ellipses`,
                         }}
-                        onChange={this.handleSearchTermOnChange}
                       />
                   </StandaloneSearchBox>
             </div>

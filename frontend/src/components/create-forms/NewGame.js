@@ -107,7 +107,7 @@ export default class NewGame extends React.Component {
             <Form.Label>Name</Form.Label>
             <Form.Control onChange={this.handleChange} name='name' placeholder="Enter name" />
           </Form.Group>
-          <Form.Group>
+          <Form.Group as={Col}>
           <Form.Label>Select a type</Form.Label>
             <Form.Control onChange={this.handleSelectType} as="select">
             {!!this.props.types ? this.props.types.map(t => <option value={t.id}>{t.name}</option>) : null}

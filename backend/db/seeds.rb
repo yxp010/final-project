@@ -15,12 +15,12 @@ dateFuture = DateTime.new(2019, 8, 29, 12, 35)
 dateBefore = DateTime.new(2019, 3, 29, 12, 35)
 
 
-Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group1 description',name: 'space city', founder_id: 1, type_id: 1, location: 'facebook', lat: 30, lng: -95)
-Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group2 description',name: 'basketball', founder_id: 3, type_id: 2, location: 'google', lat: 29.8, lng: -95)
-Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group3 description',name: '10th floor pingpong', founder_id: 2, type_id: 3, location: 'apple', lat: 29.7, lng: -95)
-Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group4 description',name: 'sy', founder_id: 1, type_id: 1, location: 'facebook', lat: 30, lng: -95)
-Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group5 description',name: 'btball', founder_id: 3, type_id: 2, location: 'google', lat: 29.6, lng: -95)
-Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group6 description',name: '8th floor pingpong', founder_id: 2, type_id: 3, location: 'what', lat: 19.5, lng: -95)
+Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group1 description',name: 'space city', founder_id: 1, type_id: 1)
+Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group2 description',name: 'basketball', founder_id: 3, type_id: 2)
+Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group3 description',name: '10th floor pingpong', founder_id: 2, type_id: 3)
+Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group4 description',name: 'sy', founder_id: 1, type_id: 1)
+Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group5 description',name: 'btball', founder_id: 3, type_id: 2)
+Group.create(img_url: 'https://thenypost.files.wordpress.com/2018/11/181129-soccer-ball-feature-image.jpg?quality=90&strip=all&w=915', city: 'Houston', state: 'TX', description: 'group6 description',name: '8th floor pingpong', founder_id: 2, type_id: 3)
 
 # GroupsUser.create(group_id: 1, user_id: 1)
 GroupsUser.create(group_id: 1, user_id: 2)

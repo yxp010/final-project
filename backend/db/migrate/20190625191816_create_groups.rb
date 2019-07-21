@@ -7,10 +7,6 @@ class CreateGroups < ActiveRecord::Migration[5.2]
       t.integer :type_id
       t.string :city
       t.string :state
-      t.string :location
-      t.float :lat
-      t.float :lng
-      t.string :zip_code
       t.string :type_name
       t.string :img_url
 
