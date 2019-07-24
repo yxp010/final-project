@@ -3,6 +3,7 @@ import NavBarContainer from './NavbarContainer'
 import LoadingAnimation from '../components/LoadingAnimation'
 import ImageBox from '../components/ImageBox'
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
 
 
 //sub page component
@@ -13,6 +14,12 @@ import { connect } from 'react-redux'
 import { storeViewingPage } from '../actions/locations'
 
 import { baseURL, joinGroup } from '../urls'
+
+const detailStyle = {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+    height: '100%'
+}
 
 class GroupShowPage extends PureComponent {
 
@@ -78,14 +85,32 @@ class GroupShowPage extends PureComponent {
         return(
             <React.Fragment>
                 <NavBarContainer />
-                <div>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
                     {!!this.state.group ?
                     <div>
-                        <ImageBox img={this.state.group.img_url}/>
-                        <h2>{this.state.group.city}, {this.state.group.state}</h2>
-                        <h2>{this.state.members.length} member(s)</h2>
-                        <h2>Created by <a href='#'>{this.state.founder.username}</a></h2>
-                        <Button disabled={this.state.disableJoin} onClick={this.handleJoin} variant="outline-primary">Join</Button>
+                        <div style={{
+                            maxWidth: '80%',
+                            width: '100%',
+                            height: '50vh', 
+                            display: 'flex',
+                            alignItems: 'center',
+                            margin: '30px auto'
+                            }}>
+                            <div style={{width: '60%', height: '100%'}}>
+                                <Image style={{borderRadius: '9px', maxHeight: '100%', maxWidth: '100%', height: '100%', width: '100%'}} src={this.state.group.img_url}/> 
+                            </div>    
+                            <div style={{display: 'flex', flexDirection: 'column', height: '100%', marginLeft: '30px'}}>
+                                <div style={detailStyle}>
+                                    <h2>{this.state.group.city}, {this.state.group.state}</h2>
+                                    <h2>{this.state.members.length} member(s)</h2>
+                                    <h2>Created by <a href='#'>{this.state.founder.username}</a></h2>
+                                </div>
+                                <div style={detailStyle}>
+                                    <Button disabled={this.state.disableJoin} onClick={this.handleJoin} variant="outline-primary">Join</Button>
+                                </div>    
+                            </div>
+                        </div>
+                        
                         <SubPage group={this.state.group} upcomingEvents={this.state.upcomingEvents}/>
                     </div>
                     : <LoadingAnimation />

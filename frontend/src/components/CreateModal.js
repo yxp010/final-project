@@ -45,9 +45,12 @@ class CreateModal extends React.Component {
         <Modal.Header closeButton>
             <Modal.Title>Create new {this.state.type}</Modal.Title>  
         </Modal.Header>
-        <div style={{padding: '40px'}}>
-            <Button variant="primary" onClick={this.handleSwitchType} name='game'>Create game</Button>
-            <Button variant="primary" onClick={this.handleSwitchType} name='group'>Create group</Button>
+        <div style={{padding: '40px', display: 'flex', flexDirection: 'column'}}>
+            <div style={{marginBottom: '14px', width: '100%'}}>
+                <Button style={{marginRight: '14px'}} variant="primary" onClick={this.handleSwitchType} name='game'>Create game</Button>
+                <Button variant="primary" onClick={this.handleSwitchType} name='group'>Create group</Button>
+            </div>
+            
             {
                 this.state.type === 'game' ?
                 <NewGame types={this.state.types}/>

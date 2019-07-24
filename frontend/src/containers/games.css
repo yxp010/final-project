@@ -34,6 +34,40 @@
     flex-direction: row;
 }
 
+.search-box {
+    transform: translate(-50%, -50%);
+    background: red;
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px;
+}
+
+.search-btn {
+    color: #e84118;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    /* max-width: 100%; */
+    width: 0px
+}
+
 /* #filter-buttons button:focus {
     background-color: #f7b731
 } */

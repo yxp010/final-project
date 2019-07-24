@@ -12,6 +12,9 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Form'
 import './games.css'
 
 // urls
@@ -190,10 +193,20 @@ class Explore extends Component {
                     {!!this.state.types ? this.renderAllTypes() : <LoadingAnimation />}
                   </DropdownButton>
                   </div>
-                  <form onSubmit={this.handleSearch}>
-                      <input type='text' placeholder='Search by name' onChange={this.handleOnChangeName}/>
+                  {/* <Form onSubmit={this.handleSearch}>
+                    <FormControl type="text" placeholder="Search" onChange={this.handleOnChangeName} className="mr-sm-2" />
+                    <Button type='submit' variant="outline-primary">Search</Button>
+                  </Form> */}
+                  <div className='search-box'>
+                      <input className='search-txt' type='text' onChange={this.handleOnChangeName} placeholder='Search by name'/>
+                      <a className='search-btn' href='#'>
+                        <i class="fas fa-search"></i>
+                      </a>
+                  </div>
+                  {/* <form onSubmit={this.handleSearch}>
+                      <input className='form-control' type='text' placeholder='Search by name' onChange={this.handleOnChangeName}/>
                       <input type='submit' />
-                  </form>
+                  </form> */}
                   <StandaloneSearchBox 
                     ref={this.onSearchProps.onSearchBoxMounted}
                     onPlacesChanged={this.onSearchProps.onPlacesChanged}
@@ -205,18 +218,7 @@ class Explore extends Component {
                     <input
                         type="text"
                         placeholder={`${this.state.city}, ${this.state.state}`}
-                        style={{
-                          boxSizing: `border-box`,
-                          border: `1px solid transparent`,
-                          width: `240px`,
-                          height: `32px`,
-                          padding: `0 12px`,
-                          borderRadius: `3px`,
-                          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                          fontSize: `14px`,
-                          outline: `none`,
-                          textOverflow: `ellipses`,
-                        }}
+                        className='form-control'
                       />
                   </StandaloneSearchBox>
             </div>

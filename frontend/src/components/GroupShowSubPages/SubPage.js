@@ -32,20 +32,20 @@ class SubPage extends PureComponent {
 
     render() {
         return(
-            <React.Fragment>
-                <Nav justify variant="tabs" defaultActiveKey="/home">
-                    <Nav.Item>
-                        <Nav.Link eventKey="description" onSelect={this.subPageOnSelect}>Description</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="upcomingEvents" onSelect={this.subPageOnSelect}>Upcomming Events</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="discussion" onSelect={this.subPageOnSelect}>Discussion</Nav.Link>
-                    </Nav.Item>
-                </Nav>
-                {this.showSubPage()}
-            </React.Fragment>
+                <div style={{maxWidth: '80%', width: '100%', margin: '0 auto'}}>
+                    <Nav justify variant="tabs" defaultActiveKey="/home">
+                        <Nav.Item>
+                            <Nav.Link eventKey="description" onSelect={this.subPageOnSelect}>Description</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="upcomingEvents" onSelect={this.subPageOnSelect}>Upcomming Events</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="discussion" onSelect={this.subPageOnSelect}>Discussion</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                    {this.showSubPage()}
+                </div>
         )
     }
 }

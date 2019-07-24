@@ -99,8 +99,10 @@ export default class NewGame extends React.Component {
         // debugger
         console.log(this.state.time)
         return <React.Fragment>
-            <TimePicker onChange={this.timeOnChange} value={this.state.time}/>
-      <DatePicker onChange={this.dateOnChange} value={this.state.date}/>
+            <div style={{marginBottom: '14px'}}>
+                <TimePicker onChange={this.timeOnChange} value={this.state.time}/>
+                <DatePicker onChange={this.dateOnChange} value={this.state.date}/>
+            </div>
         <Form onSubmit={this.handleSubmit}>
         <Form.Row>
           <Form.Group as={Col}>
