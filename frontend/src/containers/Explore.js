@@ -180,11 +180,11 @@ class Explore extends Component {
                   <h1>Find your next game</h1>
             </div>
             <div id='search-container' style={{display: 'flex'}}>
-                  <ToggleButtonGroup style={{margin: 'auto 10px'}} type="radio" name="options" defaultValue={1}>
+                  <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
                     <ToggleButton onChange={() => this.handleSwitchType('games')} variant="dark" value={1} style={{padding: '22px'}}>Games</ToggleButton>
                     <ToggleButton onChange={() => this.handleSwitchType('groups')} variant="dark" value={2} style={{padding: '22px'}}>Groups</ToggleButton>
                   </ToggleButtonGroup>
-                  <div style={{margin: 'auto 10px'}}>
+                  <div style={{margin: 'auto 20px auto 40px' }}>
                   <DropdownButton
                     size="lg"
                     title={this.state.eventType}
@@ -208,11 +208,11 @@ class Explore extends Component {
                     <input
                         type="text"
                         placeholder={`${this.state.city}, ${this.state.state}`}
-                        style={{margin: 'auto 10px', maxWidth: '240px', width: '100%'}}
+                        style={{margin: 'auto 20px', maxWidth: '240px', width: '100%'}}
                         className='form-control'
                       />
                   </StandaloneSearchBox>
-                  <form style={{margin: 'auto 10px'}} className='search-box' onSubmit={this.handleSearch}>
+                  <form style={{margin: 'auto 20px'}} className='search-box' onSubmit={this.handleSearch}>
                       <input className='search-txt' type='text' onChange={this.handleOnChangeName} placeholder='Search by name'/>
                       <button className='search-btn' type='submit'>
                         <i class="fas fa-search"></i>
