@@ -180,11 +180,11 @@ class Explore extends Component {
                   <h1>Find your next game</h1>
             </div>
             <div id='search-container' style={{display: 'flex'}}>
-                  <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+                  <ToggleButtonGroup style={{margin: 'auto 10px'}} type="radio" name="options" defaultValue={1}>
                     <ToggleButton onChange={() => this.handleSwitchType('games')} variant="dark" value={1} style={{padding: '22px'}}>Games</ToggleButton>
                     <ToggleButton onChange={() => this.handleSwitchType('groups')} variant="dark" value={2} style={{padding: '22px'}}>Groups</ToggleButton>
                   </ToggleButtonGroup>
-                  <div>
+                  <div style={{margin: 'auto 10px'}}>
                   <DropdownButton
                     size="lg"
                     title={this.state.eventType}
@@ -197,16 +197,6 @@ class Explore extends Component {
                     <FormControl type="text" placeholder="Search" onChange={this.handleOnChangeName} className="mr-sm-2" />
                     <Button type='submit' variant="outline-primary">Search</Button>
                   </Form> */}
-                  <div className='search-box'>
-                      <input className='search-txt' type='text' onChange={this.handleOnChangeName} placeholder='Search by name'/>
-                      <a className='search-btn' href='#'>
-                        <i class="fas fa-search"></i>
-                      </a>
-                  </div>
-                  {/* <form onSubmit={this.handleSearch}>
-                      <input className='form-control' type='text' placeholder='Search by name' onChange={this.handleOnChangeName}/>
-                      <input type='submit' />
-                  </form> */}
                   <StandaloneSearchBox 
                     ref={this.onSearchProps.onSearchBoxMounted}
                     onPlacesChanged={this.onSearchProps.onPlacesChanged}
@@ -218,9 +208,21 @@ class Explore extends Component {
                     <input
                         type="text"
                         placeholder={`${this.state.city}, ${this.state.state}`}
+                        style={{margin: 'auto 10px', maxWidth: '240px', width: '100%'}}
                         className='form-control'
                       />
                   </StandaloneSearchBox>
+                  <form style={{margin: 'auto 10px'}} className='search-box' onSubmit={this.handleSearch}>
+                      <input className='search-txt' type='text' onChange={this.handleOnChangeName} placeholder='Search by name'/>
+                      <button className='search-btn' type='submit'>
+                        <i class="fas fa-search"></i>
+                      </button>
+                  </form>
+                  {/* <form onSubmit={this.handleSearch}>
+                      <input className='form-control' type='text' placeholder='Search by name' onChange={this.handleOnChangeName}/>
+                      <input type='submit' />
+                  </form> */}
+                  
             </div>
           </div>
             {this.showPage()}
