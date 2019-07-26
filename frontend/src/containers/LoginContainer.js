@@ -6,6 +6,9 @@ import Button from 'react-bootstrap/Button'
 import NavbarContainer from './NavbarContainer'
 import { login } from '../actions/users'
 
+// css
+// import '../login.css'
+
 class LoginContainer extends Component {
 
     state = {
@@ -62,6 +65,7 @@ class LoginContainer extends Component {
             return <React.Fragment>
             <NavbarContainer />
             <div className='login-container'>
+                <h1 style={{marginBottom: '25px', fontSize: '40px'}}>Log in</h1>
             <Form>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
@@ -84,6 +88,20 @@ class LoginContainer extends Component {
                 </Button>
             </Form>
         </div>
+        {/* <div className='login-container'>
+            <h1>Log in</h1>
+            <form>
+                <div className='tbox'>
+                    <input type='text' placeholder='@username' />
+                </div>  
+                <div className='tbox'>
+                    <input type='text' placeholder='password' />
+                </div>  
+                <button className='login-btn' type='submit'>Log in</button>
+            </form>
+            <a className='login-b1' href='#'>Forget password?</a>
+            <a className='login-b2' href='#'>Create a account</a>
+        </div> */}
         </React.Fragment>
         }
     }
