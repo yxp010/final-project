@@ -71,7 +71,7 @@ class LoginContainer extends Component {
                     <Form.Label>Username</Form.Label>
                     <Form.Control type='username' name="username" placeholder="Enter username" onChange={this.handleChange}/>
                     <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                    We'll never share your username with anyone else.
                     </Form.Text>
                 </Form.Group>
 
@@ -79,10 +79,17 @@ class LoginContainer extends Component {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
                 </Form.Group>
+                <Form.Group>
+                    <a href='#'>Forget password?</a>
+                </Form.Group>
+                <Form.Group>
+                    <a href='#'>Create an account</a>
+                </Form.Group>
                 <Button
                     variant="primary"
                     disabled={isLoading}
                     onClick={!isLoading ? this.handleClick : null}
+                    style={{width: '100%'}}
                 >
                     {isLoading ? 'Loading…' : 'Log in'}
                 </Button>
