@@ -1,7 +1,7 @@
 import CardDeck from 'react-bootstrap/CardDeck'
 import React from 'react'
 import GroupCard from '../GroupCard'
-const EmptyCard = () => <div className='card' style={{border: 'none'}}></div>
+const EmptyCard = () => <div className='card' style={{border: 'none', marginLeft: '27px', marginRight: '27px', maxWidth: '330px', width: '100%'}}></div>
 
 const renderCards = (groups, type, handleLeaveGroup) => {
     const groupsNeed = 3 - groups.length
@@ -18,7 +18,7 @@ const renderCards = (groups, type, handleLeaveGroup) => {
 const GroupDeck = props => {
     // debugger
     return(
-        <div className='card-deck-container' style={{padding: '100px'}}>
+        <div className='card-deck-container' style={{padding: '0px 20px 20px 20px'}}>
             <CardDeck style={{width: '100%'}}>
                 {props.groups.length === 3
                 ? 

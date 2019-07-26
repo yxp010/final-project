@@ -36,8 +36,10 @@ export default class CardInfo extends PureComponent {
 
     render() {
         return( 
-        <div onClick={this.props.showModal} className='card' style={{marginLeft: '27px', marginRight: '27px', cursor: 'pointer'}}>
-        <Card.Img variant="top" src={this.props.img_url} style={{height: '305px'}} alt='Some img here'/>
+        <div onClick={this.props.showModal} className='card' style={{marginLeft: '27px', marginRight: '27px', cursor: 'pointer', maxWidth: '330px', width: '100%'}}>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '15vh', backgroundColor: 'black'}}>
+            <Card.Img variant="top" src={this.props.img_url} style={{maxHeight: '100%', maxWidth: '100%'}} alt='Some img here'/>
+        </div>
         <Card.Body>
           <Card.Subtitle className="mb-2 text-muted">{this.formatTypeName()}</Card.Subtitle>
           <h2>{this.props.name}</h2>

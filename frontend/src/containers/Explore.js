@@ -12,9 +12,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import './games.css'
 
 // urls
@@ -26,6 +24,7 @@ import { initialDiscoverURL, fetchEventsURL } from '../urls'
 class Explore extends Component {
 
     state = {
+      isLoading: true,
       type: 'games',
       eventType: 'All types',
       types: null,
@@ -94,9 +93,15 @@ class Explore extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.games) {
-          this.setState({games: data.games, types: data.types, city: data.city, state: data.state, type: data.type})
+          this.setState({
+            isLoading: true
+          }, () => this.setState({isLoading: false, games: data.games, types: data.types, city: data.city, state: data.state, type: data.type}))
+          
         } else {
-          this.setState({groups: data.groups, types: data.types, city: data.city, state: data.state, type: data.type})
+          this.setState({
+            isLoading: true
+          }, () => this.setState({isLoading: false, groups: data.groups, types: data.types, city: data.city, state: data.state, type: data.type}))
+          
         }
       })
     }
@@ -115,7 +120,7 @@ class Explore extends Component {
     showPage = () => {
       switch(this.state.type) {
         case 'games':
-          return <EventList style={{padding: '100px'}} events={this.state.games} eventtype='games'/>
+          return <EventList style={{padding: '30px', width: '100%'}} events={this.state.games} eventtype='games'/>
         case 'groups':
           return this.renderGroupDeck()
         default: 
@@ -170,8 +175,7 @@ class Explore extends Component {
     }
 
     render() {
-        console.log(this.state.games)
-        console.log(this.state.groups)
+
         return (
         <div>
           <NavbarContainer />
@@ -193,10 +197,6 @@ class Explore extends Component {
                     {!!this.state.types ? this.renderAllTypes() : <LoadingAnimation />}
                   </DropdownButton>
                   </div>
-                  {/* <Form onSubmit={this.handleSearch}>
-                    <FormControl type="text" placeholder="Search" onChange={this.handleOnChangeName} className="mr-sm-2" />
-                    <Button type='submit' variant="outline-primary">Search</Button>
-                  </Form> */}
                   <StandaloneSearchBox 
                     ref={this.onSearchProps.onSearchBoxMounted}
                     onPlacesChanged={this.onSearchProps.onPlacesChanged}
@@ -218,14 +218,13 @@ class Explore extends Component {
                         <i class="fas fa-search"></i>
                       </button>
                   </form>
-                  {/* <form onSubmit={this.handleSearch}>
-                      <input className='form-control' type='text' placeholder='Search by name' onChange={this.handleOnChangeName}/>
-                      <input type='submit' />
-                  </form> */}
                   
             </div>
           </div>
-            {this.showPage()}
+          <div className='result-container'>
+            { this.state.isLoading ? <LoadingAnimation /> : this.showPage()}
+            <Button style={{width: '50%', marginBottom: '30px', marginTop: '15px'}}>Load more</Button>
+          </div>
       </div>
         )
     }
