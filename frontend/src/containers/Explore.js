@@ -25,6 +25,8 @@ class Explore extends Component {
 
     state = {
       isLoading: true,
+      isLoadingMore: false,
+      noMoreResults: false,
       type: 'games',
       eventType: 'All types',
       types: null,
@@ -33,6 +35,38 @@ class Explore extends Component {
       city: 'Houston',
       state: 'TX',
       searchTerm: ''
+    }
+
+    handleLoadMore = () => {
+
+      this.setState({
+        isLoadingMore: true
+      }, this.loadMore)
+    }
+
+    loadMore = () => {
+      let itemsCount
+      this.state.type === 'games' ? itemsCount = this.state.games.length : itemsCount = this.state.groups.length
+      if (itemsCount < 9) {
+        this.handleFetch(fetchEventsURL, {
+          events_count: 18,
+          type: this.state.type,
+          city: this.state.city,
+          searchTerm: this.state.searchTerm,
+          eventType: this.state.eventType,
+          state: this.state.state
+        })
+      } else {
+        this.handleFetch(fetchEventsURL, {
+          events_count: itemsCount + 9,
+          type: this.state.type,
+          city: this.state.city,
+          searchTerm: this.state.searchTerm,
+          eventType: this.state.eventType,
+          state: this.state.state
+        })
+      }
+      
     }
 
     renderGroupDeck = () => {
@@ -62,7 +96,7 @@ class Explore extends Component {
           const places = refs.searchBox.getPlaces();
           if (places[0].address_components.find(c => c.types.find(t => t === "locality")) && places[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1"))) {
             this.handleFetch(fetchEventsURL, {
-              events_count: 10,
+              events_count: 9,
               type: this.state.type,
               city: places[0].address_components.find(c => c.types.find(t => t === "locality")).long_name,
               state: places[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name,
@@ -95,12 +129,12 @@ class Explore extends Component {
         if (data.games) {
           this.setState({
             isLoading: true
-          }, () => this.setState({isLoading: false, games: data.games, types: data.types, city: data.city, state: data.state, type: data.type}))
+          }, () => this.setState({isLoading: false, isLoadingMore: false, games: data.games, types: data.types, city: data.city, state: data.state, type: data.type}))
           
         } else {
           this.setState({
             isLoading: true
-          }, () => this.setState({isLoading: false, groups: data.groups, types: data.types, city: data.city, state: data.state, type: data.type}))
+          }, () => this.setState({isLoading: false, isLoadingMore: false, groups: data.groups, types: data.types, city: data.city, state: data.state, type: data.type}))
           
         }
       })
@@ -108,7 +142,7 @@ class Explore extends Component {
 
     componentDidMount() {
       this.handleFetch(initialDiscoverURL, {
-        events_count: 10,
+        events_count: 9,
         type: this.state.type,
         city: this.state.city,
         searchTerm: this.state.searchTerm,
@@ -120,7 +154,7 @@ class Explore extends Component {
     showPage = () => {
       switch(this.state.type) {
         case 'games':
-          return <EventList style={{padding: '30px', width: '100%'}} events={this.state.games} eventtype='games'/>
+          return <EventList style={{padding: '0 20px 20px 20px', width: '100%'}} events={this.state.games} eventtype='games'/>
         case 'groups':
           return this.renderGroupDeck()
         default: 
@@ -131,7 +165,7 @@ class Explore extends Component {
     handleOnSelect = e => {
       this.setState({eventType: e})
       this.handleFetch(fetchEventsURL, {
-        events_count: 10,
+        events_count: 9,
         type: this.state.type,
         city: this.state.city,
         searchTerm: this.state.searchTerm,
@@ -150,7 +184,7 @@ class Explore extends Component {
     handleSearch = e => {
       e.preventDefault()
       this.handleFetch(fetchEventsURL, {
-        events_count: 10,
+        events_count: 9,
         type: this.state.type,
         city: this.state.city,
         searchTerm: this.state.searchTerm,
@@ -163,9 +197,12 @@ class Explore extends Component {
       this.setState({searchTerm: e.target.value})
     }
 
+
+    // handle 'games' and 'groups' type change
     handleSwitchType = type => {
+
       this.handleFetch(fetchEventsURL, {
-        events_count: 10,
+        events_count: 9,
         type: type,
         city: this.state.city,
         searchTerm: this.state.searchTerm,
@@ -223,7 +260,11 @@ class Explore extends Component {
           </div>
           <div className='result-container'>
             { this.state.isLoading ? <LoadingAnimation /> : this.showPage()}
-            <Button style={{width: '50%', marginBottom: '30px', marginTop: '15px'}}>Load more</Button>
+            <div style={{width: '50%', marginBottom: '30px', marginTop: '15px'}}>
+            {
+              this.state.isLoadingMore ? <LoadingAnimation /> : <Button onClick={this.handleLoadMore} style={{width: '100%'}}>Load more</Button>
+            }
+            </div>
           </div>
       </div>
         )

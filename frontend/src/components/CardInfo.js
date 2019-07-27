@@ -16,7 +16,7 @@ export default class CardInfo extends PureComponent {
     }
 
     formatTypeName = () => {
-      this.props.type_name.split(' ').map(word => word.slice(0, 1).toUpperCase() + word.slice(1)).join(' ')
+      return this.props.type_name.split(' ').map(word => word.slice(0, 1).toUpperCase() + word.slice(1)).join(' ')
     }
 
     componentDidMount() {
