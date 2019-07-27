@@ -18,7 +18,7 @@ class EventListItem extends PureComponent {
             <React.Fragment>
                 <div style={{marginBottom: '10px'}}>
                     <ListGroup.Item action onClick={this.showModal} style={{fontSize: '25px'}}>
-                        <h1 >{this.props.name}</h1>
+                        <h1 >{this.props.name} <span style={{fontSize: '18px'}}>({this.props.type_name})</span></h1>
                         <span style={{fontSize: '18px'}}>{this.props.location}</span><br></br>
                         <span style={{fontSize: '18px'}}>{this.props.date}</span>
                     </ListGroup.Item>
