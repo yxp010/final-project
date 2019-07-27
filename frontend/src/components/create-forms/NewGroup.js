@@ -3,10 +3,10 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {states} from '../../statesData'
-
+import { connect } from 'react-redux'
 import { groupsURL } from '../../urls'
 
-export default class NewGame extends React.Component {
+class NewGroup extends React.Component {
 
     state = {
       group: {
@@ -21,40 +21,45 @@ export default class NewGame extends React.Component {
 
     handleSubmit = e => {
       e.preventDefault()
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.group.city},${this.state.group.state}&key=AIzaSyAi5sbutxQNY6KM3W7mez3opdp8VfeneMY`)
-      .then(res => res.json())
-      .then(data => {
-          console.log(data)
-          // debugger
-          if (data.status !== 'OK' || this.state.group.city.length === 0 || this.state.group.state.length !== 2) {
-            // To do: show error text
-            // show address is not correct error
-            console.log('City or state cannot be empty')
-          } else if (!data.results[0].address_components.find(c => {
-            if (c.types.includes('locality') && (c.long_name.toLowerCase().replace(/ /g, '') === this.state.group.city.toLowerCase().replace(/ /g, '') || c.short_name.toLowerCase().replace(/ /g, '') === this.state.group.city.toLowerCase().replace(/ /g, ''))){
-                return true
-            } else {
-              return false
-            }
-          })) {
-            console.log('Please enter valid city or state')
-          }  else {
-          fetch(groupsURL, {
-              method: 'POST',
-              credentials: "include",
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                group: {
-                  ...this.state.group,
-                  city: data.results[0].address_components.find(c => c.types.find(t => t === "locality")).long_name,
-                  state: data.results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name
-                }
-              })
-          })
-      }
-    })
+
+      if (this.props.loggedIn) {
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.group.city},${this.state.group.state}&key=AIzaSyAi5sbutxQNY6KM3W7mez3opdp8VfeneMY`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            // debugger
+            if (data.status !== 'OK' || this.state.group.city.length === 0 || this.state.group.state.length !== 2) {
+              // To do: show error text
+              // show address is not correct error
+              console.log('City or state cannot be empty')
+            } else if (!data.results[0].address_components.find(c => {
+              if (c.types.includes('locality') && (c.long_name.toLowerCase().replace(/ /g, '') === this.state.group.city.toLowerCase().replace(/ /g, '') || c.short_name.toLowerCase().replace(/ /g, '') === this.state.group.city.toLowerCase().replace(/ /g, ''))){
+                  return true
+              } else {
+                return false
+              }
+            })) {
+              console.log('Please enter valid city or state')
+            }  else {
+            fetch(groupsURL, {
+                method: 'POST',
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  group: {
+                    ...this.state.group,
+                    city: data.results[0].address_components.find(c => c.types.find(t => t === "locality")).long_name,
+                    state: data.results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name
+                  }
+                })
+            })
+        }
+      })
+    } else {
+      window.location.assign('/login')
+    }
   }
 
     handleChange = e => {
@@ -133,3 +138,5 @@ export default class NewGame extends React.Component {
       </Form>
     }
 }
+
+export default connect(state => ({loggedIn: state.loggedIn}))(NewGroup)

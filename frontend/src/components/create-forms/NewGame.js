@@ -5,8 +5,9 @@ import Button from 'react-bootstrap/Button'
 import TimePicker from 'react-time-picker' 
 import DatePicker from 'react-date-picker'
 import {createGame} from '../../urls'
+import { connect } from 'react-redux'
 
-export default class NewGame extends React.Component {
+class NewGame extends React.Component {
 
     constructor() {
         super()
@@ -58,41 +59,49 @@ export default class NewGame extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        // debugger
+
         console.log(this.state)
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}&key=AIzaSyAi5sbutxQNY6KM3W7mez3opdp8VfeneMY`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.status !== 'OK') {
-                // To do: show error text
-                // show address is not correct error
-                console.log('error')
-            } else {
-            fetch(createGame, {
-                method: 'POST',
-                credentials: "include",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    time: this.state.time,
-                    date: this.state.date,
-                    year: this.state.year,
-                    month: this.state.month,
-                    day: this.state.day,
-                    name: this.state.name,
-                    type: this.state.type,
-                    location: data.results[0].formatted_address,
-                    city: data.results[0].address_components.find(c => c.types.find(t => t === "locality")).long_name,
-                    state: data.results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name,
-                    lat: data.results[0].geometry.location.lat,
-                    lng: data.results[0].geometry.location.lng,
-                    zip_code: data.results[0].address_components.find(c => c.types.find(t => t === "postal_code")).short_name,
-                    desicription: this.state.desicription,
-                    img_url: this.state.img_url
+        if (this.props.loggedIn) {
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.location}&key=AIzaSyAi5sbutxQNY6KM3W7mez3opdp8VfeneMY`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status !== 'OK') {
+                    // To do: show error text
+                    // show address is not correct error
+                    console.log('error')
+                } else {
+                fetch(createGame, {
+                    method: 'POST',
+                    credentials: "include",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        time: this.state.time,
+                        date: this.state.date,
+                        year: this.state.year,
+                        month: this.state.month,
+                        day: this.state.day,
+                        name: this.state.name,
+                        type: this.state.type,
+                        location: data.results[0].formatted_address,
+                        city: data.results[0].address_components.find(c => c.types.find(t => t === "locality")).long_name,
+                        state: data.results[0].address_components.find(c => c.types.find(t => t === "administrative_area_level_1")).short_name,
+                        lat: data.results[0].geometry.location.lat,
+                        lng: data.results[0].geometry.location.lng,
+                        zip_code: data.results[0].address_components.find(c => c.types.find(t => t === "postal_code")).short_name,
+                        desicription: this.state.desicription,
+                        img_url: this.state.img_url
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        
+                    })
                 })
-            })
-        }})
+            }})
+        } else {
+            window.location.assign('/login')
+        }
     }
 
     render() {
@@ -138,3 +147,5 @@ export default class NewGame extends React.Component {
       </React.Fragment>
     }
 }
+
+export default connect(state => ({loggedIn: state.loggedIn}))(NewGame)
